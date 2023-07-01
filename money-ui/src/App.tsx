@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import logo from './money-svgrepo-com.svg'
+import logo from './logo.svg'
 
 function App() {
   return (
