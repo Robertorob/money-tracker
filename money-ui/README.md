@@ -22,3 +22,8 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
+
+## Run in docker
+
+docker build --tag money-ui .
+docker run -it --rm -p 3000:80 --name money-ui money-ui
