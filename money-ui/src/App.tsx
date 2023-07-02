@@ -1,17 +1,10 @@
 import React from 'react';
 import './App.css';
-import logo from './logo.svg'
+import HelloPage from './components/hello-page'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Web Application for money tracking.
-        </p>
-      </header>
-    </div>
+    <HelloPage />
   );
 }
 
