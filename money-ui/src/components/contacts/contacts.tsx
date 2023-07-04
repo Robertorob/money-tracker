@@ -6,6 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from '@mui/material';
+import ContactField from './contact-field';
 
 export default function Contacts() {
   return (
@@ -15,21 +16,11 @@ export default function Contacts() {
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Akhmetshin Robert
         </Typography>
-        <Typography variant="body2">
-          Gmail: <Link href='mailto:ahmetshinrobert94@gmail.com' underline='hover'>ahmetshinrobert94@gmail.com</Link>
-        </Typography>
-        <Typography variant="body2">
-          Yandex: <Link href='mailto:robertorob1@yandex.ru' underline='hover'>robertorob1@yandex.ru</Link>
-        </Typography>
-        <Typography variant="body2">
-          Telegram: <Link href='https://t.me/robertorob' underline='hover'>robertorob</Link>
-        </Typography>
-        <Typography variant="body2">
-          GitHub: <Link href='https://github.com/Robertorob/money-tracker' underline='hover'>Robertorob/money-tracker</Link>
-        </Typography>
-        <Typography variant="body2">
-          DockerHub: <Link href='https://hub.docker.com/repository/docker/robertorob3/money-ui' underline='hover'>robertorob3/money-ui</Link>
-        </Typography>
+        <ContactField name='Gmail' link='mailto:ahmetshinrobert94@gmail.com' value='ahmetshinrobert94@gmail.com' />
+        <ContactField name='Yandex' link='mailto:robertorob1@yandex.ru' value='robertorob1@yandex.ru' />
+        <ContactField name='Telegram' link='https://t.me/robertorob' value='robertorob' />
+        <ContactField name='GitHub' link='https://github.com/Robertorob/money-tracker' value='Robertorob/money-tracker' />
+        <ContactField name='DockerHub' link='https://hub.docker.com/repository/docker/robertorob3/money-ui' value='robertorob3/money-ui' />
       </CardContent>
     </Card>
     </>
