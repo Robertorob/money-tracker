@@ -8,7 +8,11 @@ interface ContactFieldProps {
 }
 
 export default function ContactField(props: ContactFieldProps) {
-  return  (<Typography variant="body2" className="contact-field">
-            {props.name}: <Link href={props.link} underline='hover'>{props.value}</Link>
-          </Typography>)
+  return  (
+    <div className="contact-field">
+      <Typography variant="body2">
+        {props.name}: <Link href={props.link} underline='hover'>{props.value}</Link>
+      </Typography>
+    </div>
+  )
 }
