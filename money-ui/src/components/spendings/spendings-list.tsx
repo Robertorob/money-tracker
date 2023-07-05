@@ -27,7 +27,7 @@ export default function SpendingsList(props: SpendingsListProps) {
               <TableCell component="th" scope="row">
                 {spending.comment}
               </TableCell>
-              <TableCell align="right">{spending.category}</TableCell>
+              <TableCell align="right">{spending.category.name}</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -7,7 +7,7 @@ import Spendings from './components/spendings/spendings';
 
 export default function App() {
   return (
-    <TabContainer labels={['Home', 'Content', 'Contacts']}>
+    <TabContainer labels={['Home', 'Spendings', 'Contacts']}>
       <HelloPage />
       <Spendings />
       <Contacts />

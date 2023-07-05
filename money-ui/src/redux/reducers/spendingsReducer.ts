@@ -7,19 +7,19 @@ const initialState = {
     {
       id: 1,
       comment: 'bread, water in supermarket', 
-      category: 'Food',
+      category: { id: 1, name: 'Food and everyday stuff' },
     },
     {
       id: 2,
       comment: 'gas', 
-      category: 'Car',
+      category: { id: 2, name: 'Car' },
     },
     {
       id: 3,
       comment: 'mobile phone', 
-      category: 'Tech',
+      category: { id: 3, name: 'Cafe' },
     },
-  ]
+  ],
 }
 
 export const spendingsReducer = (state = initialState, action: AnyAction): any => {
