@@ -1,5 +1,6 @@
-import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from "@mui/material";
-import { useSelector } from "react-redux";
+import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, Button } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 interface SpendingsListProps {
   children?: any;
@@ -7,15 +8,25 @@ interface SpendingsListProps {
 
 export default function SpendingsList(props: SpendingsListProps) {
 
-  let state = useSelector((state: any) => state.spendings);
+  const state = useSelector((state: any) => state.spendings);
+
+  const dispatch = useDispatch();
+
+  const deleteButtonClickHandle = (id: number) => {
+    dispatch({
+      type: 'DELETE_SPENDING',
+      payload: id,
+    });
+  }
 
   return <>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead className='table-header'>
+        <TableHead>
           <TableRow>
-            <TableCell>Comment</TableCell>
-            <TableCell align="right">Category</TableCell>
+            <TableCell sx={{ fontWeight: 'bold' }}>Comment</TableCell>
+            <TableCell sx={{ fontWeight: 'bold' }} align="right">Category</TableCell>
+            <TableCell sx={{ fontWeight: 'bold' }} align="right"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -28,6 +39,7 @@ export default function SpendingsList(props: SpendingsListProps) {
                 {spending.comment}
               </TableCell>
               <TableCell align="right">{spending.category.name}</TableCell>
+              <TableCell align="right"><Button onClick={() => deleteButtonClickHandle(spending.id)} startIcon={<DeleteIcon />}></Button></TableCell>
             </TableRow>
           ))}
         </TableBody>

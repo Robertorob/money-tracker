@@ -1,6 +1,5 @@
 import { Button, FormControl, FormGroup, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, createTheme } from "@mui/material";
 import { useState } from "react";
-import './spendings.css';
 import { useDispatch, useSelector } from "react-redux";
 
 interface SpendingFormProps {
@@ -45,15 +44,17 @@ export default function SpendingForm(props: SpendingFormProps) {
   }
 
   const dispatch = useDispatch();
-
-  const addButtonClickHandle = () => {
+  let id: number = 100;
+  const createButtonClickHandle = () => {
     dispatch({
       type: 'CREATE_SPENDING',
       payload: {
+        id: id,
         comment: comment,
         category: category,
       }
     });
+    id++;
   }
 
   return (
@@ -76,7 +77,7 @@ export default function SpendingForm(props: SpendingFormProps) {
             </Select>
           </FormControl>
           <FormControl>
-            <Button variant="contained" onClick={addButtonClickHandle}>Add</Button>
+            <Button variant="contained" onClick={createButtonClickHandle}>Add</Button>
           </FormControl>
         </FormGroup>
   )
