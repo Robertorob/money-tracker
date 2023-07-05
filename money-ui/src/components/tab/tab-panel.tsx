@@ -10,16 +10,12 @@ interface TabPanelProps {
 }
   
 export default function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
+  const { children, value, index } = props;
 
   return (
     <div
       className='tab-panel'
-      role="tabpanel"
       hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
     >
     {value === index && (
       <Box sx={{ p: 3 }}>

@@ -1,6 +1,6 @@
 import { FormControl, FormGroup, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
 import { useState } from "react";
-import './spending-form.css'
+import './spendings.css';
 
 interface SpendingFormProps {
   children?: any;
@@ -30,11 +30,12 @@ export default function SpendingForm(props: SpendingFormProps) {
     { id: 4, name: 'Clothes' },
   ]
 
-  return <FormGroup>
-          <FormControl fullWidth className="form-control">
+  return (
+        <FormGroup>
+          <FormControl fullWidth sx={{ marginTop: '1em' }}>
             <TextField value={comment} label="Comment" variant="outlined" onChange={handleCommentChange} />
           </FormControl>
-          <FormControl fullWidth className="form-control">
+          <FormControl fullWidth sx={{ marginTop: '1em', marginBottom: '1em' }}>
             <InputLabel>Category</InputLabel>
             <Select
               value={category}
@@ -49,4 +50,5 @@ export default function SpendingForm(props: SpendingFormProps) {
             </Select>
           </FormControl>
         </FormGroup>
+  )
 }
