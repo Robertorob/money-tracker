@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import SpendingForm from "./spending-form";
+import SpendingsList from "./spendings-list";
 
 interface SpendingsProps {
   children?: any,
 }
 
 export default function Spendings(props: any) {
-  let state = useSelector((state: any) => state.spendings);
-
   return (
     <>
-      {state.spendings.map((f: any) => (<div>Comment: {f.comment}, Category: {f.category}</div>))}
+      <SpendingForm />
+      <SpendingsList />
     </>
   )
 }
