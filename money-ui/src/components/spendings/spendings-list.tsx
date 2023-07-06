@@ -29,6 +29,7 @@ export default function SpendingsList(props: SpendingsListProps) {
 
   const tableHeadSx = { fontWeight: 'bold' };
   const pZeroSx = { p: 0 };
+  const maxWidthSx = {maxWidth: '40px', maxHeight: '40px', minWidth: '40px', minHeight: '40px'}
 
   return <>
     <TableContainer component={Paper}>
@@ -53,8 +54,8 @@ export default function SpendingsList(props: SpendingsListProps) {
               </TableCell>
               <TableCell align="right">{spending.comment}</TableCell>
               <TableCell align="right">{spending.category.name}</TableCell>
-              <TableCell sx={pZeroSx} align="right"><Button onClick={() => updateButtonClickHandle(spending.id)} startIcon={<ModeIcon />}></Button></TableCell>
-              <TableCell sx={pZeroSx} align="right"><Button onClick={() => deleteButtonClickHandle(spending.id)} startIcon={<DeleteIcon />}></Button></TableCell>
+              <TableCell sx={pZeroSx} align="right"><Button sx={maxWidthSx} onClick={() => updateButtonClickHandle(spending.id)} startIcon={<ModeIcon />}></Button></TableCell>
+              <TableCell sx={pZeroSx} align="right"><Button sx={maxWidthSx} onClick={() => deleteButtonClickHandle(spending.id)} startIcon={<DeleteIcon />}></Button></TableCell>
             </TableRow>
           ))}
         </TableBody>
