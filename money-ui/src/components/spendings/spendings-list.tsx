@@ -24,7 +24,9 @@ export default function SpendingsList(props: SpendingsListProps) {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell sx={{ fontWeight: 'bold' }}>Comment</TableCell>
+            <TableCell sx={{ fontWeight: 'bold' }}>Cost</TableCell>
+            <TableCell sx={{ fontWeight: 'bold' }} align="right">Comment</TableCell>
+            <TableCell sx={{ fontWeight: 'bold' }} align="right">Category</TableCell>
             <TableCell sx={{ fontWeight: 'bold' }} align="right">Category</TableCell>
             <TableCell sx={{ fontWeight: 'bold' }} align="right"></TableCell>
           </TableRow>
@@ -36,8 +38,9 @@ export default function SpendingsList(props: SpendingsListProps) {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {spending.comment}
+                {spending.cost}
               </TableCell>
+              <TableCell align="right">{spending.comment}</TableCell>
               <TableCell align="right">{spending.category.name}</TableCell>
               <TableCell align="right"><Button onClick={() => deleteButtonClickHandle(spending.id)} startIcon={<DeleteIcon />}></Button></TableCell>
             </TableRow>

@@ -6,17 +6,20 @@ const initialState = {
   spendings: [
     {
       id: 1,
+      cost: 1500,
       comment: 'bread, water in supermarket', 
       category: { id: 1, name: 'Food and everyday stuff' },
     },
     {
       id: 2,
+      cost: 900,
       comment: 'gas', 
       category: { id: 2, name: 'Car' },
     },
     {
       id: 3,
-      comment: 'mobile phone', 
+      cost: 2200,
+      comment: 'with friends', 
       category: { id: 3, name: 'Cafe' },
     },
   ],

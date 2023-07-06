@@ -18,6 +18,7 @@ export default function SpendingForm(props: SpendingFormProps) {
   }
   const [category, setCategory] = useState(initialCategory);
   const [comment, setComment] = useState('');
+  const [cost, setCost] = useState(0);
 
   const categories: Category[] = [
     { id: 1, name: 'Food and everyday stuff' },
@@ -36,6 +37,10 @@ export default function SpendingForm(props: SpendingFormProps) {
     setComment(event.target.value as string);
   };
 
+  const handleCostChange = (event: any) => {
+    setCost(event.target.value as number);
+  };
+
   const formGroupSx: any = {
     p:'1em',
     borderRadius: '4px',
@@ -50,6 +55,7 @@ export default function SpendingForm(props: SpendingFormProps) {
       type: 'CREATE_SPENDING',
       payload: {
         id: id,
+        cost: cost,
         comment: comment,
         category: category,
       }
@@ -59,6 +65,9 @@ export default function SpendingForm(props: SpendingFormProps) {
 
   return (
         <FormGroup sx={formGroupSx}>
+          <FormControl fullWidth sx={{ marginTop: '1em' }}>
+            <TextField value={cost} label="Cost" variant="outlined" onChange={handleCostChange} type="number" />
+          </FormControl>
           <FormControl fullWidth sx={{ marginTop: '1em' }}>
             <TextField value={comment} label="Comment" variant="outlined" onChange={handleCommentChange} />
           </FormControl>
