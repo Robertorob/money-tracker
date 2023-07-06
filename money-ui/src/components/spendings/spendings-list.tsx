@@ -1,4 +1,4 @@
-import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, Button } from "@mui/material";
+import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, Button, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeIcon from '@mui/icons-material/Mode';
@@ -21,10 +21,10 @@ export default function SpendingsList(props: SpendingsListProps) {
   }
   
   const updateButtonClickHandle = (id: number) => {
-    // dispatch({
-    //   type: 'UPDATE_SPENDING',
-    //   payload: id,
-    // });
+    dispatch({
+      type: 'SEND_SPENDING_TO_FORM',
+      payload: id,
+    });
   }
 
   const tableHeadSx = { fontWeight: 'bold' };

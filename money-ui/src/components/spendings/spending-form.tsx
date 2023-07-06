@@ -12,13 +12,7 @@ interface Category {
 }
 
 export default function SpendingForm(props: SpendingFormProps) {
-  const initialCategory: Category = {
-    id: 0,
-    name: '',
-  }
-  const [category, setCategory] = useState(initialCategory);
-  const [comment, setComment] = useState('');
-  const [cost, setCost] = useState(0);
+  const spendingForm = useSelector((state: any) => state.spendings.spendingForm);
 
   const categories: Category[] = [
     { id: 1, name: 'Food and everyday stuff' },
@@ -27,18 +21,28 @@ export default function SpendingForm(props: SpendingFormProps) {
     { id: 4, name: 'Clothes' },
   ];
 
+  const dispatch = useDispatch();
+
   const handleCategoryChange = (event: SelectChangeEvent) => {
     const category: Category | undefined = categories.find(category => category?.id?.toString() === event.target.value);
-    if (category)
-      setCategory(category);
+    dispatch({
+      type: 'FORM_CATEGORY_CHANGE',
+      payload: category,
+    })
   };
 
   const handleCommentChange = (event: any) => {
-    setComment(event.target.value as string);
+    dispatch({
+      type: 'FORM_COMMENT_CHANGE',
+      payload: event.target.value as string,
+    })
   };
 
   const handleCostChange = (event: any) => {
-    setCost(event.target.value as number);
+    dispatch({
+      type: 'FORM_COST_CHANGE',
+      payload: event.target.value as number,
+    })
   };
 
   const formGroupSx: any = {
@@ -48,16 +52,15 @@ export default function SpendingForm(props: SpendingFormProps) {
     boxShadow: '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)'
   }
 
-  const dispatch = useDispatch();
   let id: number = 100;
   const createButtonClickHandle = () => {
     dispatch({
       type: 'CREATE_SPENDING',
       payload: {
         id: id,
-        cost: cost,
-        comment: comment,
-        category: category,
+        cost: spendingForm.cost,
+        comment: spendingForm.comment,
+        category: spendingForm.category,
       }
     });
     id++;
@@ -67,27 +70,26 @@ export default function SpendingForm(props: SpendingFormProps) {
     dispatch({
       type: 'UPDATE_SPENDING',
       payload: {
-        id: id,
-        cost: cost,
-        comment: comment,
-        category: category,
+        id: spendingForm.id,
+        cost: spendingForm.cost,
+        comment: spendingForm.comment,
+        category: spendingForm.category,
       }
     });
-    id++;
   }
 
   return (
         <FormGroup sx={formGroupSx}>
           <FormControl fullWidth sx={{ marginTop: '1em' }}>
-            <TextField value={cost} label="Cost" variant="outlined" onChange={handleCostChange} type="number" />
+            <TextField value={spendingForm.cost} label="Cost" variant="outlined" onChange={handleCostChange} type="number" />
           </FormControl>
           <FormControl fullWidth sx={{ marginTop: '1em' }}>
-            <TextField value={comment} label="Comment" variant="outlined" onChange={handleCommentChange} />
+            <TextField value={spendingForm.comment} label="Comment" variant="outlined" onChange={handleCommentChange} />
           </FormControl>
           <FormControl fullWidth sx={{ marginTop: '1em', marginBottom: '1em' }}>
             <InputLabel>Category</InputLabel>
             <Select
-              value={category.id.toString()}
+              value={spendingForm.category.id.toString()}
               label="Category"
               onChange={handleCategoryChange}
             >
@@ -98,9 +100,13 @@ export default function SpendingForm(props: SpendingFormProps) {
               }
             </Select>
           </FormControl>
-          <FormControl>
-            <Button variant="contained" onClick={createButtonClickHandle}>Add</Button>
-          </FormControl>
+            {spendingForm.update ? 
+              <FormControl>
+                <Button variant="contained" onClick={updateButtonClickHandle}>Update</Button>
+              </FormControl> : 
+            <FormControl>
+              <Button variant="contained" onClick={createButtonClickHandle}>Add</Button>
+            </FormControl>}
         </FormGroup>
   )
 }

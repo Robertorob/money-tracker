@@ -3,6 +3,13 @@
 import { AnyAction } from "@reduxjs/toolkit";
 
 const initialState = {
+  spendingForm: {
+    id: 0,
+    cost: 0,
+    comment: '', 
+    category: { id: 0, name: '' },
+    update: false,
+  },
   spendings: [
     {
       id: 1,
@@ -33,18 +40,53 @@ export const spendingsReducer = (state = initialState, action: AnyAction): any =
         spendings: [...state.spendings, action.payload]
       }
     case 'UPDATE_SPENDING':
-      let updatedSpending = state.spendings.filter(spending => spending.id === action.payload.id)
+      const updatedSpending = state.spendings.filter(spending => spending.id === action.payload.id);
 
       if (!updatedSpending)
         throw new Error('Entity not found to update');
 
-      updatedSpending[0].cost = action.payload.cost;
-      updatedSpending[0].comment = action.payload.comment;
-      updatedSpending[0].category = action.payload.category;
+      let newUpdatedSpending = { ...updatedSpending[0] };
+      newUpdatedSpending.cost = action.payload.cost;
+      newUpdatedSpending.comment = action.payload.comment;
+      newUpdatedSpending.category = action.payload.category;
+
+      let newSpendingsAfterUpdate = state.spendings.filter(spending => spending.id !== action.payload.id);
+      newSpendingsAfterUpdate.push(newUpdatedSpending);
+      newSpendingsAfterUpdate = newSpendingsAfterUpdate.sort((a: any, b: any) => a.id > b.id ? 1: -1);
 
       return {
         ...state,
-        spendings: [...state.spendings]
+        spendings: [...newSpendingsAfterUpdate],
+        spendingForm: {
+          ...initialState.spendingForm
+        }
+      }
+    case 'SEND_SPENDING_TO_FORM':
+      let spendingToSend = state.spendings.filter(spending => spending.id === action.payload)[0];
+
+      let newSpendingForm = {
+        ...spendingToSend,
+        update: true,
+      }
+
+      return {
+        ...state,
+        spendingForm: {...state.spendingForm, ...newSpendingForm }
+      }
+    case 'FORM_COMMENT_CHANGE':
+      return {
+        ...state,
+        spendingForm: {...state.spendingForm, comment: action.payload }
+      }
+    case 'FORM_COST_CHANGE':
+      return {
+        ...state,
+        spendingForm: {...state.spendingForm, cost: action.payload }
+      }
+    case 'FORM_CATEGORY_CHANGE':
+      return {
+        ...state,
+        spendingForm: {...state.spendingForm, category: action.payload }
       }
     case 'DELETE_SPENDING':
       return {
