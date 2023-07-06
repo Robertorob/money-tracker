@@ -63,6 +63,19 @@ export default function SpendingForm(props: SpendingFormProps) {
     id++;
   }
 
+  const updateButtonClickHandle = () => {
+    dispatch({
+      type: 'UPDATE_SPENDING',
+      payload: {
+        id: id,
+        cost: cost,
+        comment: comment,
+        category: category,
+      }
+    });
+    id++;
+  }
+
   return (
         <FormGroup sx={formGroupSx}>
           <FormControl fullWidth sx={{ marginTop: '1em' }}>

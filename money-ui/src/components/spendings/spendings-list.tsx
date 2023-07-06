@@ -1,6 +1,7 @@
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteIcon from '@mui/icons-material/Delete';
+import ModeIcon from '@mui/icons-material/Mode';
 
 interface SpendingsListProps {
   children?: any;
@@ -18,17 +19,27 @@ export default function SpendingsList(props: SpendingsListProps) {
       payload: id,
     });
   }
+  
+  const updateButtonClickHandle = (id: number) => {
+    // dispatch({
+    //   type: 'UPDATE_SPENDING',
+    //   payload: id,
+    // });
+  }
+
+  const tableHeadSx = { fontWeight: 'bold' };
+  const pZeroSx = { p: 0 };
 
   return <>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell sx={{ fontWeight: 'bold' }}>Cost</TableCell>
-            <TableCell sx={{ fontWeight: 'bold' }} align="right">Comment</TableCell>
-            <TableCell sx={{ fontWeight: 'bold' }} align="right">Category</TableCell>
-            <TableCell sx={{ fontWeight: 'bold' }} align="right">Category</TableCell>
-            <TableCell sx={{ fontWeight: 'bold' }} align="right"></TableCell>
+            <TableCell sx={tableHeadSx}>Cost</TableCell>
+            <TableCell sx={tableHeadSx} align="right">Comment</TableCell>
+            <TableCell sx={tableHeadSx} align="right">Category</TableCell>
+            <TableCell align="right"></TableCell>
+            <TableCell align="right"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -42,7 +53,8 @@ export default function SpendingsList(props: SpendingsListProps) {
               </TableCell>
               <TableCell align="right">{spending.comment}</TableCell>
               <TableCell align="right">{spending.category.name}</TableCell>
-              <TableCell align="right"><Button onClick={() => deleteButtonClickHandle(spending.id)} startIcon={<DeleteIcon />}></Button></TableCell>
+              <TableCell sx={pZeroSx} align="right"><Button onClick={() => updateButtonClickHandle(spending.id)} startIcon={<ModeIcon />}></Button></TableCell>
+              <TableCell sx={pZeroSx} align="right"><Button onClick={() => deleteButtonClickHandle(spending.id)} startIcon={<DeleteIcon />}></Button></TableCell>
             </TableRow>
           ))}
         </TableBody>
