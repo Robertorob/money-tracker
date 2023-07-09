@@ -27,3 +27,6 @@ Your app is ready to be deployed!
 
 docker build --tag money-ui .
 docker run -it --rm -p 3000:80 --name money-ui money-ui
+
+## Run Storybook
+npm run storybook
