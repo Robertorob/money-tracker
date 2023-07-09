@@ -1,5 +1,4 @@
 import { Button, FormControl, FormGroup, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, createTheme } from "@mui/material";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 interface SpendingFormProps {

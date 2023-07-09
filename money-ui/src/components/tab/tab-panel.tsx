@@ -17,11 +17,11 @@ export default function TabPanel(props: TabPanelProps) {
       className='tab-panel'
       hidden={value !== index}
     >
-    {value === index && (
-      <Box sx={{ p: 3 }}>
-        <Typography>{children}</Typography>
-      </Box>
-    )}
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, Button, TextField, Grid, Box, Typography } from "@mui/material";
+import { Button, Grid, Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeIcon from '@mui/icons-material/Mode';
@@ -28,42 +28,10 @@ export default function SpendingsList(props: SpendingsListProps) {
     });
   }
 
-  const tableHeadSx = { fontWeight: 'bold' };
-  const pZeroSx = { p: 0 };
   const maxWidthSx = {maxWidth: '40px', maxHeight: '40px', minWidth: '40px', minHeight: '40px'}
 
   return <>
     {
-    /* <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table" classes={}>
-        <TableHead>
-          <TableRow>
-            <TableCell sx={tableHeadSx}>Cost</TableCell>
-            <TableCell sx={tableHeadSx} align="right">Comment</TableCell>
-            <TableCell sx={tableHeadSx} align="right">Category</TableCell>
-            <TableCell align="right"></TableCell>
-            <TableCell align="right"></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {state.spendings.map((spending: any) => (
-            <TableRow
-              key={spending.id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {spending.cost}
-              </TableCell>
-              <TableCell align="right">{spending.comment}</TableCell>
-              <TableCell align="right">{spending.category.name}</TableCell>
-              <TableCell sx={pZeroSx} align="right"><Button sx={maxWidthSx} onClick={() => updateButtonClickHandle(spending.id)} startIcon={<ModeIcon />}></Button></TableCell>
-              <TableCell sx={pZeroSx} align="right"><Button sx={maxWidthSx} onClick={() => deleteButtonClickHandle(spending.id)} startIcon={<DeleteIcon />}></Button></TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer> */
-
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={{ xs:1, md: 1, lg: 1 }}>
         <Grid item xs={3} md={3} lg={3}>
@@ -99,7 +67,6 @@ export default function SpendingsList(props: SpendingsListProps) {
         )}
       </Grid>
     </Box>
-
     }
   </>
 }
