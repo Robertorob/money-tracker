@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import TabPanel from './tab-panel';
+import { Container } from '@mui/material';
 
 interface TabContainerlProps {
   children?: React.ReactNode;
@@ -32,9 +33,12 @@ export default function TabContainer(props: TabContainerlProps) {
       </Tabs>
     </Box>
     { 
-      React.Children.map(children, (child, index) => (<TabPanel value={value} index={index}>
-        {child}
-      </TabPanel>)) 
+      React.Children.map(children, (child, index) =>
+        <Container maxWidth={'md'} sx={{p: 0}}>
+          <TabPanel value={value} index={index}>
+            {child}
+          </TabPanel>
+        </Container>)
     }
     </Box>
   );
