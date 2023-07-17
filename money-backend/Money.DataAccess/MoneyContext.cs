@@ -8,6 +8,7 @@ public class MoneyContext : DbContext
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {
+    optionsBuilder.UseSnakeCaseNamingConvention();
   }
 
   public DbSet<Spending> Spendings { get; set; }

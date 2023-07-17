@@ -1,0 +1,12 @@
+<Project>
+  <Target Name="CopyMigratinsAfterBuild" AfterTargets="Build">
+    <ItemGroup>
+      <MigrationFiles Include="$(OutDir)Migrations\**\*.*"/>
+      <DataSeedingFiles Include="$(OutDir)DataSeeding\**\*.*"/>
+    </ItemGroup>
+
+    <Copy SourceFiles="@(MigrationFiles)" DestinationFiles="$(ProjectDir)Migrations\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Copy SourceFiles="@(DataSeedingFiles)" DestinationFiles="$(ProjectDir)DataSeeding\%(RecursiveDir)%(Filename)%(Extension)" />
+  </Target>
+  
+</Project>

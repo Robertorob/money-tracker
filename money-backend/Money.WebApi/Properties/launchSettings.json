@@ -1,6 +1,13 @@
 {
   "profiles": {
-    "http": {
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "publishAllPorts": true,
+      "useSSL": true
+    },
+    "WebApi": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
@@ -10,7 +17,7 @@
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5062"
     },
-    "https": {
+    "WebAPI https": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
@@ -19,13 +26,6 @@
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7183;http://localhost:5062"
-    },
-    "Docker": {
-      "commandName": "Docker",
-      "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
-      "publishAllPorts": true,
-      "useSSL": true
     }
   },
   "$schema": "https://json.schemastore.org/launchsettings.json"

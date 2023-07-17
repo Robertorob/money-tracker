@@ -17,8 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Money.BusinessLogic\Money.BusinessLogic.csproj" />
     <ProjectReference Include="..\Money.DataAccess\Money.DataAccess.csproj" />
     <ProjectReference Include="..\Money.Migrator\Money.Migrator.csproj" />
   </ItemGroup>
 
+	<Import Project="..\CopyMigrations.targets" />
 </Project>

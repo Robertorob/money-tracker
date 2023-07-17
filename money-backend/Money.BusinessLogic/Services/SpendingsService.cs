@@ -1,12 +1,14 @@
 ﻿using Microsoft.Extensions.Logging;
+using Money.BusinessLogic.Dto;
+using Money.BusinessLogic.Interfaces;
 using Money.DataAccess;
 
 namespace Money.BusinessLogic.Services;
 
 /// <summary>
-/// Сервис калибровки.
+/// Spendings service.
 /// </summary>
-public class SpendingsService // : ISpendingService
+public class SpendingsService : ISpendingsService
 {
   private readonly MoneyContext _context;
   private readonly ILogger<SpendingsService> _logger;
@@ -18,13 +20,15 @@ public class SpendingsService // : ISpendingService
     _logger = logger;
   }
 
-  public async Task CreateSpendingAsync()
+  public async Task CreateSpendingAsync(CreateSpendingDto dto)
   {
     _logger.LogInformation("Creating new spending.");
 
     var entity = new DataAccess.Entities.Spending
     {
-        
+      Cost = dto.Cost,
+      Comment = dto.Comment,
+      CategoryId = dto.CategoryId,
     };
 
     await _context.Spendings.AddAsync(entity);

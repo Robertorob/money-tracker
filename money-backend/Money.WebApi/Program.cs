@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Money.BusinessLogic.Interfaces;
+using Money.BusinessLogic.Services;
 using Money.DataAccess;
 using Money.Migrator;
 
@@ -8,15 +10,18 @@ builder.Configuration
   .AddJsonFile("appsettings.json", optional: false)
   .AddJsonFile("appsettings.override.json", optional: true);
 
-MigrationHelper.Run();
+string contextName = "Money";
+MigrationHelper.Run(contextName);
 
 builder.Services
-  .AddDbContext<MoneyContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("money-db")));
+  .AddDbContext<MoneyContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString(contextName)));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-//builder.Services.addcontez
+
+builder.Services
+  .AddTransient<ISpendingsService, SpendingsService>();
 
 var app = builder.Build();
 

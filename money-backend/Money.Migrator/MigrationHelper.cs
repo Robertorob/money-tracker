@@ -44,7 +44,7 @@ namespace Money.Migrator
     /// <summary>
     /// Runs migrations.
     /// </summary>
-    public static void Run()
+    public static void Run(string contextName)
     {
       var config = new ConfigurationBuilder()
         .SetBasePath(Directory.GetCurrentDirectory())
@@ -52,7 +52,7 @@ namespace Money.Migrator
         .AddJsonFile("appsettings.override.json", optional: true)
         .Build();
 
-      string? connectionString = config.GetConnectionString("money-db");
+      string? connectionString = config.GetConnectionString(contextName);
 
       if (connectionString is null || string.IsNullOrWhiteSpace(connectionString))
       {
