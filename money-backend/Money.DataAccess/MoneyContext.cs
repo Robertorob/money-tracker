@@ -1,13 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using money_backend_data_access.Entities;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Money.DataAccess.Entities;
 
-namespace money_backend_data_access;
+namespace Money.DataAccess;
 public class MoneyContext : DbContext
 {
   public MoneyContext(DbContextOptions<MoneyContext> options) : base(options) { }
