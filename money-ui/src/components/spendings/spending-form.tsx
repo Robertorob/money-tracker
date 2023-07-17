@@ -1,48 +1,31 @@
-import { Button, FormControl, FormGroup, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, createTheme } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { Button, FormControl, FormGroup, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 
-interface SpendingFormProps {
+export interface ISpendingFormProps {
   children?: any;
+  categories: ICategory[];
+  form: ISpendingForm;
+  onCostChange: any;
+  onCommentChange: any;
+  onCategoryChange: any;
+  onUpdateButtonClick: any;
+  onCreateButtonClick: any;
 }
 
-interface Category {
+export interface ISpendingForm {
+  id: number;
+  cost: number;
+  comment: string;
+  category: ICategory;
+  isUpdate: boolean,
+}
+
+export interface ICategory {
   id: number;
   name: string;
 }
 
-export default function SpendingForm(props: SpendingFormProps) {
-  const spendingForm = useSelector((state: any) => state.spendings.spendingForm);
-
-  const categories: Category[] = [
-    { id: 1, name: 'Food and everyday stuff' },
-    { id: 2, name: 'Car' },
-    { id: 3, name: 'Cafe' },
-    { id: 4, name: 'Clothes' },
-  ];
-
-  const dispatch = useDispatch();
-
-  const handleCategoryChange = (event: SelectChangeEvent) => {
-    const category: Category | undefined = categories.find(category => category?.id?.toString() === event.target.value);
-    dispatch({
-      type: 'FORM_CATEGORY_CHANGE',
-      payload: category,
-    })
-  };
-
-  const handleCommentChange = (event: any) => {
-    dispatch({
-      type: 'FORM_COMMENT_CHANGE',
-      payload: event.target.value as string,
-    })
-  };
-
-  const handleCostChange = (event: any) => {
-    dispatch({
-      type: 'FORM_COST_CHANGE',
-      payload: event.target.value as number,
-    })
-  };
+export default function SpendingForm(props: ISpendingFormProps) {
+  
 
   const formGroupSx: any = {
     p:'1em',
@@ -51,60 +34,34 @@ export default function SpendingForm(props: SpendingFormProps) {
     boxShadow: '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)'
   }
 
-  let id: number = 100;
-  const createButtonClickHandle = () => {
-    dispatch({
-      type: 'CREATE_SPENDING',
-      payload: {
-        id: id,
-        cost: spendingForm.cost,
-        comment: spendingForm.comment,
-        category: spendingForm.category,
-      }
-    });
-    id++;
-  }
-
-  const updateButtonClickHandle = () => {
-    dispatch({
-      type: 'UPDATE_SPENDING',
-      payload: {
-        id: spendingForm.id,
-        cost: spendingForm.cost,
-        comment: spendingForm.comment,
-        category: spendingForm.category,
-      }
-    });
-  }
-
   return (
         <FormGroup sx={formGroupSx}>
           <FormControl fullWidth sx={{ marginTop: '1em' }}>
-            <TextField value={spendingForm.cost} label="Cost" variant="outlined" onChange={handleCostChange} type="number" />
+            <TextField value={props.form.cost} label="Cost" variant="outlined" onChange={props.onCostChange} type="number" />
           </FormControl>
           <FormControl fullWidth sx={{ marginTop: '1em' }}>
-            <TextField value={spendingForm.comment} label="Comment" variant="outlined" onChange={handleCommentChange} />
+            <TextField value={props.form.comment} label="Comment" variant="outlined" onChange={props.onCommentChange} />
           </FormControl>
           <FormControl fullWidth sx={{ marginTop: '1em', marginBottom: '1em' }}>
             <InputLabel>Category</InputLabel>
             <Select
-              value={spendingForm.category.id.toString()}
+              value={props.form.category.id.toString()}
               label="Category"
-              onChange={handleCategoryChange}
+              onChange={props.onCategoryChange}
             >
               {
-                categories.map((category: Category)=> (
+                props.categories.map((category: ICategory)=> (
                   <MenuItem value={category.id.toString()}>{category.name}</MenuItem>
                 ))
               }
             </Select>
           </FormControl>
-            {spendingForm.update ? 
+            {props.form.isUpdate ? 
               <FormControl>
-                <Button variant="contained" onClick={updateButtonClickHandle}>Update</Button>
+                <Button variant="contained" onClick={props.onUpdateButtonClick}>Update</Button>
               </FormControl> : 
             <FormControl>
-              <Button variant="contained" onClick={createButtonClickHandle}>Add</Button>
+              <Button variant="contained" onClick={props.onCreateButtonClick}>Add</Button>
             </FormControl>}
         </FormGroup>
   )

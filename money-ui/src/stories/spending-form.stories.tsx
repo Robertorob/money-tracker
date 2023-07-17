@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import store from '../redux/store';
 
-import SpendingForm from '../components/spendings/spending-form';
-import { Provider } from 'react-redux';
+import SpendingForm, { ICategory, ISpendingForm, ISpendingFormProps } from '../components/spendings/spending-form';
 
 const meta: Meta<typeof SpendingForm> = {
   title: 'Spendings/SpendingForm',
@@ -16,14 +14,52 @@ const meta: Meta<typeof SpendingForm> = {
 export default meta;
 type Story = StoryObj<typeof SpendingForm>;
 
-const SpendingFormAdd = (): any => {
-  return 
-  
+let initialCategory: ICategory = {
+  id: 0,
+  name: "Food"
+}
+
+let categories: ICategory[] = [
+  initialCategory,
+  {
+    id: 1,
+    name: 'Sport'
+  }
+]
+
+let spendingForm: ISpendingForm = {
+  id: 0,
+  cost: 0,
+  comment: '',
+  category: initialCategory,
+  isUpdate: false,
+}
+
+let spendingFormProps: ISpendingFormProps = {
+  categories: categories,
+  form: spendingForm,
+  onCostChange: undefined,
+  onCommentChange: undefined,
+  onCategoryChange: undefined,
+  onUpdateButtonClick: undefined,
+  onCreateButtonClick: undefined
+}
+
+export const AddSpending: Story = {
+  name: 'Add Spending',
+  args: {
+    ...spendingFormProps,
+    form: spendingForm
+  }
 };
 
-export const Add: Story = {
-  render: () => 
-    <Provider store={store}>
-      <SpendingForm />
-    </Provider>
-}
+export const UpdateSpending: Story = {
+  name: 'Update Spending',
+  args: {
+    ...spendingFormProps,
+    form: {
+      ...spendingForm,
+      isUpdate: true,
+    },
+  }
+};

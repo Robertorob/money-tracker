@@ -1,14 +1,22 @@
 // import { CREATE_POST, FETCH_POSTS } from "./types";
 
 import { AnyAction } from "@reduxjs/toolkit";
+import { ICategory, ISpendingForm } from "../../components/spendings/spending-form";
 
-const initialState = {
+interface SpendingsState {
+  spendingForm: ISpendingForm;
+  spendings: any[];
+  categories: ICategory[];
+  createId: number; // DELETE AFTER IMPLEMENTING REAL CREATE WITH DATABASE
+}
+
+const initialState: SpendingsState = {
   spendingForm: {
     id: 0,
     cost: 0,
     comment: '', 
     category: { id: 0, name: '' },
-    update: false,
+    isUpdate: false,
   },
   spendings: [
     {
@@ -30,14 +38,23 @@ const initialState = {
       category: { id: 3, name: 'Cafe' },
     },
   ],
+  categories: [
+    { id: 1, name: 'Food and everyday stuff' },
+    { id: 2, name: 'Car' },
+    { id: 3, name: 'Cafe' },
+    { id: 4, name: 'Clothes' },
+  ],
+  createId: 100,
 }
 
 export const spendingsReducer = (state = initialState, action: AnyAction): any => {
   switch (action.type) {
     case 'CREATE_SPENDING':
+      action.payload.id = state.createId;
       return {
         ...state,
-        spendings: [...state.spendings, action.payload]
+        spendings: [...state.spendings, action.payload],
+        createId: state.createId + 1,
       }
     case 'UPDATE_SPENDING':
       const updatedSpending = state.spendings.filter(spending => spending.id === action.payload.id);
@@ -64,9 +81,9 @@ export const spendingsReducer = (state = initialState, action: AnyAction): any =
     case 'SEND_SPENDING_TO_FORM':
       let spendingToSend = state.spendings.filter(spending => spending.id === action.payload)[0];
 
-      let newSpendingForm = {
+      let newSpendingForm: ISpendingForm = {
         ...spendingToSend,
-        update: true,
+        isUpdate: true,
       }
 
       return {
