@@ -4,8 +4,6 @@ services:
     restart: always
     image: postgres:15.3
     container_name: money-db
-    networks:
-      - money
     ports:
       - "5432:5432"
     environment:
@@ -17,19 +15,15 @@ services:
     restart: always
     image: robertorob3/money-backend:1.0.0
     container_name: money-backend
-    networks:
-     - money
     ports:
-     - "5299:5299"
+     - "5299:80"
     volumes:
-     - ./appsettings.json:/app/appsettings.json
+     - ./money-backend/appsettings.override.json:/app/appsettings.json
   ui:
     restart: always
-    image: docker.dev.umno.digital/lms-ui:1.2.3
+    image: robertorob3/money-ui:1.0.4
     container_name: money-ui
-    networks:
-      - money
     ports:
-      - "8080:80"
+      - "80:80"
     extra_hosts:
       - "money-backend:host-gateway"
