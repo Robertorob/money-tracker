@@ -526,3 +526,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+appsettings.override.json
+.env

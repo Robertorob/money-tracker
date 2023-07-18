@@ -1,0 +1,35 @@
+version: '3'
+services:
+  db:
+    restart: always
+    image: postgres:15.3
+    container_name: money-db
+    networks:
+      - money
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./money-db:/var/lib/postgresql/data
+  backend:
+    restart: always
+    image: robertorob3/money-backend:1.0.0
+    container_name: money-backend
+    networks:
+     - money
+    ports:
+     - "5299:5299"
+    volumes:
+     - ./appsettings.json:/app/appsettings.json
+  ui:
+    restart: always
+    image: docker.dev.umno.digital/lms-ui:1.2.3
+    container_name: money-ui
+    networks:
+      - money
+    ports:
+      - "8080:80"
+    extra_hosts:
+      - "money-backend:host-gateway"

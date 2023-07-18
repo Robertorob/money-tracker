@@ -17,9 +17,10 @@ public class SpendingsController : ControllerBase
   }
 
   [HttpGet]
-  public string Get()
+  [Route("/isAlive")]
+  public string IsAlive()
   {
-    return "empty";
+    return "Alive";
   }
 
   [HttpPost]

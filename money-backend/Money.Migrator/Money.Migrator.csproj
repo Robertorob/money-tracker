@@ -23,8 +23,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="DbUp" Version="4.6.0" />
-		<PackageReference Include="dbup-postgresql" Version="4.6.3" />
+		<PackageReference Include="DbUp" Version="5.0.8" />
+		<PackageReference Include="dbup-postgresql" Version="5.0.8" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.4" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
