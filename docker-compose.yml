@@ -18,7 +18,7 @@ services:
     ports:
      - "5299:80"
     volumes:
-     - ./money-backend/appsettings.override.json:/app/appsettings.json
+     - ./money-backend/appsettings.override.json:/publish/appsettings.json
   ui:
     restart: always
     image: robertorob3/money-ui:1.0.4
