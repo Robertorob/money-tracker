@@ -12,4 +12,6 @@ public class MoneyContext : DbContext
   }
 
   public DbSet<Spending> Spendings { get; set; }
+
+  public DbSet<Category> Categories { get; set; }
 }

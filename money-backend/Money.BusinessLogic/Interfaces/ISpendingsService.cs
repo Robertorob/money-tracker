@@ -3,7 +3,7 @@ namespace Money.BusinessLogic.Interfaces;
 
 public interface ISpendingsService
 {
-  Task CreateSpendingAsync(CreateSpendingDto dto);
+  Task<CreateSpendingResultDto> CreateSpendingAsync(CreateSpendingDto dto);
 
   Task UpdateSpendingAsync();
 

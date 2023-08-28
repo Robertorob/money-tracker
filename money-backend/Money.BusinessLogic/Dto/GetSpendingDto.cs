@@ -8,5 +8,5 @@ public class GetSpendingDto
 
   public string Comment{ get; set; }
 
-  public CategoryDto Category { get; set; }
+  public CategoryDto? Category { get; set; }
 }

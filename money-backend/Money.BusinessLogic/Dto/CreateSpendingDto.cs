@@ -6,5 +6,5 @@ public class CreateSpendingDto
 
   public string Comment { get; set; }
 
-  public long CategoryId { get; set; }
+  public long? CategoryId { get; set; }
 }

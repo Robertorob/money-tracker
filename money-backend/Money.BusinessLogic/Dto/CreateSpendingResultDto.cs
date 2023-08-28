@@ -1,5 +1,6 @@
-﻿namespace Money.DataAccess.Entities;
-public class Spending
+﻿namespace Money.BusinessLogic.Dto;
+
+public class CreateSpendingResultDto
 {
   public long Id { get; set; }
 
@@ -8,6 +9,4 @@ public class Spending
   public string Comment { get; set; }
 
   public long? CategoryId { get; set; }
-
-  public Category Category { get; set; }
 }

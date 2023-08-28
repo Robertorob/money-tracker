@@ -22,7 +22,7 @@ public class SpendingsService : ISpendingsService
     _logger = logger;
   }
 
-  public async Task CreateSpendingAsync(CreateSpendingDto dto)
+  public async Task<CreateSpendingResultDto> CreateSpendingAsync(CreateSpendingDto dto)
   {
     _logger.LogInformation("Creating new spending.");
 
@@ -35,13 +35,21 @@ public class SpendingsService : ISpendingsService
 
     await _context.Spendings.AddAsync(entity);
     await _context.SaveChangesAsync();
+
+    return new()
+    {
+      Id = entity.Id,
+      CategoryId = entity.CategoryId,
+      Comment = entity.Comment,
+      Cost = entity.Cost,
+    };
   }
 
   public async Task<GetSpendingsDto> GetSpendingAsync()
   {
     _logger.LogInformation("Get spendings.");
 
-    var spendings = await _context.Spendings.Take(10).AsNoTracking().ToListAsync();
+    var spendings = await _context.Spendings.Include(spending => spending.Category).Take(10).AsNoTracking().ToListAsync();
 
     return new()
     {
@@ -50,9 +58,10 @@ public class SpendingsService : ISpendingsService
         Id = spending.Id,
         Cost = spending.Cost,
         Comment = spending.Comment,
-        Category = new()
+        Category = spending.CategoryId is null ? null :
+        new()
         {
-          Id = spending.CategoryId,
+          Id = spending.CategoryId.Value,
           Name = spending.Category.Name
         }
       }).ToList(),
