@@ -4,6 +4,7 @@ import SpendingsList from "./spendings-list";
 import { SelectChangeEvent } from "@mui/material";
 import { createSpendingAsync } from "../../redux/actionCreators";
 import { useAppDispatch } from "../../redux/store";
+import { useEffect } from "react";
 
 interface SpendingsProps {
   children?: any,
@@ -14,6 +15,17 @@ export default function Spendings(props: any) {
   const categories = useSelector((state: any) => state.spendings.categories);
 
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    fetch('http://localhost:5062/getCategories')
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch({ type: 'FETCH_CATEGORIES', payload: data.categories })
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
 
   const handleCategoryChange = (event: SelectChangeEvent) => {
     if (!categories) {

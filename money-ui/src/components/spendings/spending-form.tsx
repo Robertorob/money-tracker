@@ -1,4 +1,6 @@
 import { Button, FormControl, FormGroup, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export interface ISpendingFormProps {
   children?: any;
@@ -25,8 +27,6 @@ export interface ICategory {
 }
 
 export default function SpendingForm(props: ISpendingFormProps) {
-  
-
   const formGroupSx: any = {
     p:'1em',
     borderRadius: '4px',
@@ -35,34 +35,34 @@ export default function SpendingForm(props: ISpendingFormProps) {
   }
 
   return (
-        <FormGroup sx={formGroupSx}>
-          <FormControl fullWidth sx={{ marginTop: '1em' }}>
-            <TextField value={props.form.cost} label="Cost" variant="outlined" onChange={props.onCostChange} type="number" />
-          </FormControl>
-          <FormControl fullWidth sx={{ marginTop: '1em' }}>
-            <TextField value={props.form.comment} label="Comment" variant="outlined" onChange={props.onCommentChange} />
-          </FormControl>
-          <FormControl fullWidth sx={{ marginTop: '1em', marginBottom: '1em' }}>
-            <InputLabel>Category</InputLabel>
-            <Select
-              value={props.form.category.id.toString()}
-              label="Category"
-              onChange={props.onCategoryChange}
-            >
-              {
-                props.categories.map((category: ICategory)=> (
-                  <MenuItem value={category.id.toString()}>{category.name}</MenuItem>
-                ))
-              }
-            </Select>
-          </FormControl>
-            {props.form.isUpdate ? 
-              <FormControl>
-                <Button variant="contained" onClick={props.onUpdateButtonClick}>Update</Button>
-              </FormControl> : 
-            <FormControl>
-              <Button variant="contained" onClick={props.onCreateButtonClick}>Add</Button>
-            </FormControl>}
-        </FormGroup>
+    <FormGroup sx={formGroupSx}>
+      <FormControl fullWidth sx={{ marginTop: '1em' }}>
+        <TextField value={props.form.cost} label="Cost" variant="outlined" onChange={props.onCostChange} type="number" />
+      </FormControl>
+      <FormControl fullWidth sx={{ marginTop: '1em' }}>
+        <TextField value={props.form.comment} label="Comment" variant="outlined" onChange={props.onCommentChange} />
+      </FormControl>
+      <FormControl fullWidth sx={{ marginTop: '1em', marginBottom: '1em' }}>
+        <InputLabel>Category</InputLabel>
+        <Select
+          value={props.form.category?.id?.toString()}
+          label="Category"
+          onChange={props.onCategoryChange}
+        >
+          {
+            props.categories.map((category: ICategory)=> (
+              <MenuItem value={category.id.toString()}>{category?.name}</MenuItem>
+            ))
+          }
+        </Select>
+      </FormControl>
+        {props.form.isUpdate ? 
+          <FormControl>
+            <Button variant="contained" onClick={props.onUpdateButtonClick}>Update</Button>
+          </FormControl> : 
+        <FormControl>
+          <Button variant="contained" onClick={props.onCreateButtonClick}>Add</Button>
+        </FormControl>}
+    </FormGroup>
   )
 }

@@ -3,16 +3,26 @@ import { useDispatch, useSelector } from "react-redux";
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeIcon from '@mui/icons-material/Mode';
 import '../tab/tab-panel.css';
+import { useEffect } from "react";
 
 interface SpendingsListProps {
   children?: any;
 }
 
 export default function SpendingsList(props: SpendingsListProps) {
-
   const state = useSelector((state: any) => state.spendings);
-
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetch('http://localhost:5062/getSpendings')
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch({ type: 'FETCH_SPENDINGS', payload: data.spendings })
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
 
   const deleteButtonClickHandle = (id: number) => {
     dispatch({
@@ -55,7 +65,7 @@ export default function SpendingsList(props: SpendingsListProps) {
               <Typography mt={2}>{spending.comment}</Typography>
             </Grid>
             <Grid item xs={3} md={3} lg={3}>
-              <Typography mt={2}>{spending.category.name}</Typography>
+              <Typography mt={2}>{spending.category?.name}</Typography>
             </Grid>
             <Grid item xs={1} md={1} lg={1}>
               <Button sx={maxWidthSx} onClick={() => updateButtonClickHandle(spending.id)} startIcon={<ModeIcon />} />
