@@ -17,7 +17,7 @@ export default function Spendings(props: any) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    fetch('http://localhost:5062/getCategories')
+    fetch(`${process.env.REACT_APP_SERVER_URL}/getCategories`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({ type: 'FETCH_CATEGORIES', payload: data.categories })

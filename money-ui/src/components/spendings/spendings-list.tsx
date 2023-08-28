@@ -14,7 +14,7 @@ export default function SpendingsList(props: SpendingsListProps) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch('http://localhost:5062/getSpendings')
+    fetch(`${process.env.REACT_APP_SERVER_URL}/getSpendings`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({ type: 'FETCH_SPENDINGS', payload: data.spendings })

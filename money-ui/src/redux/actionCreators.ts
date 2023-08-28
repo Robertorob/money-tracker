@@ -6,7 +6,7 @@ export function createSpendingAsync(spending: Spending) {
       ...spending,
       categoryId: spending.category?.id,
     }
-    await fetch('http://localhost:5062/createSpending', {
+    await fetch(`${process.env.REACT_APP_SERVER_URL}/createSpending`, {
       method: 'POST',
       body: JSON.stringify(createSpending),
       headers: {
