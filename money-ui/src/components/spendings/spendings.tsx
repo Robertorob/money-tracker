@@ -1,7 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import SpendingForm, { ICategory } from "./spending-form";
 import SpendingsList from "./spendings-list";
 import { SelectChangeEvent } from "@mui/material";
+import { createSpendingAsync } from "../../redux/actionCreators";
+import { useAppDispatch } from "../../redux/store";
 
 interface SpendingsProps {
   children?: any,
@@ -11,14 +13,14 @@ export default function Spendings(props: any) {
   const spendingForm = useSelector((state: any) => state.spendings.spendingForm);
   const categories = useSelector((state: any) => state.spendings.categories);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleCategoryChange = (event: SelectChangeEvent) => {
-    if (!props.categories) {
+    if (!categories) {
       return;
     }
 
-    const category: ICategory | undefined = props.categories.find((category: ICategory) => category?.id?.toString() === event.target.value);
+    const category: ICategory | undefined = categories.find((category: ICategory) => category?.id?.toString() === event.target.value);
     dispatch({
       type: 'FORM_CATEGORY_CHANGE',
       payload: category,
@@ -40,14 +42,7 @@ export default function Spendings(props: any) {
   };
   
   const handleCreateButtonClick = () => {
-    dispatch({
-      type: 'CREATE_SPENDING',
-      payload: {
-        cost: props.form.cost,
-        comment: props.form.comment,
-        category: props.form.category,
-      }
-    });
+    dispatch(createSpendingAsync(spendingForm))
   }
 
   const handleUpdateButtonClick = () => {

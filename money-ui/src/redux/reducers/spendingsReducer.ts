@@ -50,10 +50,10 @@ const initialState: SpendingsState = {
 export const spendingsReducer = (state = initialState, action: AnyAction): any => {
   switch (action.type) {
     case 'CREATE_SPENDING':
-      action.payload.id = state.createId;
+      const createId = state.createId;
       return {
         ...state,
-        spendings: [...state.spendings, action.payload],
+        spendings: [...state.spendings, { ...action.payload, createId }],
         createId: state.createId + 1,
       }
     case 'UPDATE_SPENDING':

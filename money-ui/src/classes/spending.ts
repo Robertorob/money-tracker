@@ -5,6 +5,7 @@ export interface SpendingCategory {
 
 export interface Spending {
   id: number;
+  cost: number;
   comment: string;
   category: SpendingCategory;
 }
