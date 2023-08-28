@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Money.BusinessLogic.Dto;
 using Money.BusinessLogic.Interfaces;
 using Money.DataAccess;
+using Money.DataAccess.Entities;
 
 namespace Money.BusinessLogic.Services;
 
@@ -26,6 +27,8 @@ public class SpendingsService : ISpendingsService
   {
     _logger.LogInformation("Creating new spending.");
 
+    var categoryTask = _context.Categories.FindAsync(dto.CategoryId);
+
     var entity = new DataAccess.Entities.Spending
     {
       Cost = dto.Cost,
@@ -36,12 +39,33 @@ public class SpendingsService : ISpendingsService
     await _context.Spendings.AddAsync(entity);
     await _context.SaveChangesAsync();
 
+    var category = await categoryTask;
     return new()
     {
       Id = entity.Id,
-      CategoryId = entity.CategoryId,
+      Category = dto.CategoryId is null ? null : new()
+      {
+        Id = category.Id,
+        Name = category.Name,
+      },
       Comment = entity.Comment,
       Cost = entity.Cost,
+    };
+  }
+
+  public async Task<GetCategoriesDto> GetCategoriesAsync()
+  {
+    _logger.LogInformation("Get categories.");
+
+    var entities = await _context.Categories.AsNoTracking().ToListAsync();
+
+    return new()
+    {
+      Categories = entities.Select(entity => new GetCategoryDto
+      {
+        Id = entity.Id,
+        Name = entity.Name,
+      }).ToList(),
     };
   }
 
@@ -49,20 +73,20 @@ public class SpendingsService : ISpendingsService
   {
     _logger.LogInformation("Get spendings.");
 
-    var spendings = await _context.Spendings.Include(spending => spending.Category).Take(10).AsNoTracking().ToListAsync();
+    var entities = await _context.Spendings.Include(spending => spending.Category).Take(10).AsNoTracking().ToListAsync();
 
     return new()
     {
-      Spendings = spendings.Select(spending => new GetSpendingDto
+      Spendings = entities.Select(entity => new GetSpendingDto
       {
-        Id = spending.Id,
-        Cost = spending.Cost,
-        Comment = spending.Comment,
-        Category = spending.CategoryId is null ? null :
+        Id = entity.Id,
+        Cost = entity.Cost,
+        Comment = entity.Comment,
+        Category = entity.CategoryId is null ? null :
         new()
         {
-          Id = spending.CategoryId.Value,
-          Name = spending.Category.Name
+          Id = entity.CategoryId.Value,
+          Name = entity.Category.Name
         }
       }).ToList(),
     };

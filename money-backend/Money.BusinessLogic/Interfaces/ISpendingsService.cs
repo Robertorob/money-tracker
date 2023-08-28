@@ -8,4 +8,6 @@ public interface ISpendingsService
   Task UpdateSpendingAsync();
 
   Task<GetSpendingsDto> GetSpendingAsync();
+
+  Task<GetCategoriesDto> GetCategoriesAsync();
 }

@@ -36,4 +36,11 @@ public class SpendingsController : ControllerBase
   {
     return await _spendingService.GetSpendingAsync();
   }
+
+  [HttpGet]
+  [Route("/getCategories")]
+  public async Task<GetCategoriesDto> GetCategoriesAsync()
+  {
+    return await _spendingService.GetCategoriesAsync();
+  }
 }

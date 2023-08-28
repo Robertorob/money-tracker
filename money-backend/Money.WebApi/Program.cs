@@ -23,6 +23,15 @@ builder.Services.AddSwaggerGen();
 builder.Services
   .AddTransient<ISpendingsService, SpendingsService>();
 
+builder.Services.AddCors(options =>
+{
+  options.AddPolicy("AllowAny",
+    policy =>
+    {
+      policy.AllowAnyOrigin().AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -34,8 +43,8 @@ if (app.Environment.IsDevelopment())
 
 // app.UseHttpsRedirection();
 
-app.UseAuthorization();
-
+// app.UseAuthorization();
+app.UseCors("AllowAny");
 app.MapControllers();
 
 app.Run();

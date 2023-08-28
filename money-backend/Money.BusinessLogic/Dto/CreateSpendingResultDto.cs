@@ -8,5 +8,5 @@ public class CreateSpendingResultDto
 
   public string Comment { get; set; }
 
-  public long? CategoryId { get; set; }
+  public CategoryDto? Category { get; set; }
 }
