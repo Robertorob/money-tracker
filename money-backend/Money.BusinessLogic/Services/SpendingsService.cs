@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Humanizer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Money.BusinessLogic.Dto;
 using Money.BusinessLogic.Interfaces;
 using Money.DataAccess;
@@ -33,6 +35,28 @@ public class SpendingsService : ISpendingsService
 
     await _context.Spendings.AddAsync(entity);
     await _context.SaveChangesAsync();
+  }
+
+  public async Task<GetSpendingsDto> GetSpendingAsync()
+  {
+    _logger.LogInformation("Get spendings.");
+
+    var spendings = await _context.Spendings.Take(10).AsNoTracking().ToListAsync();
+
+    return new()
+    {
+      Spendings = spendings.Select(spending => new GetSpendingDto
+      {
+        Id = spending.Id,
+        Cost = spending.Cost,
+        Comment = spending.Comment,
+        Category = new()
+        {
+          Id = spending.CategoryId,
+          Name = spending.Category.Name
+        }
+      }).ToList(),
+    };
   }
 
   public async Task UpdateSpendingAsync()

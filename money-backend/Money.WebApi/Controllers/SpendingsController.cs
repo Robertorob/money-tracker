@@ -30,4 +30,11 @@ public class SpendingsController : ControllerBase
     await _spendingService.CreateSpendingAsync(dto);
     return "Ok";
   }
+
+  [HttpPost]
+  [Route("/getSpendings")]
+  public async Task<GetSpendingsDto> CreateSpendingAsync()
+  {
+    return await _spendingService.GetSpendingAsync();
+  }
 }
