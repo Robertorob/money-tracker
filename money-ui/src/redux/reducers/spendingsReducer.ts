@@ -1,5 +1,3 @@
-// import { CREATE_POST, FETCH_POSTS } from "./types";
-
 import { AnyAction } from "@reduxjs/toolkit";
 import { ICategory, ISpendingForm } from "../../components/spendings/spending-form";
 
@@ -49,7 +47,11 @@ export const spendingsReducer = (state = initialState, action: AnyAction): any =
             comment: action.payload.comment,
             category: action.payload.category,
           } : spending
-        )
+        ),
+        spendingForm: {
+          ...state.spendingForm,
+          isUpdate: false,
+        }
      }
     case 'SEND_SPENDING_TO_FORM':
       let spendingToSend = state.spendings.filter(spending => spending.id === action.payload)[0];
@@ -69,9 +71,10 @@ export const spendingsReducer = (state = initialState, action: AnyAction): any =
         spendingForm: {...state.spendingForm, cost: action.payload }
       }
     case 'FORM_CATEGORY_CHANGE':
+      debugger;
       return {
         ...state,
-        spendingForm: {...state.spendingForm, category: action.payload }
+        spendingForm: {...state.spendingForm, category: state.categories.filter(category => action.payload === category.id?.toString())[0] }
       }
     case 'DELETE_SPENDING':
       return {

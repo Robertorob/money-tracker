@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import SpendingForm, { ICategory } from "./spending-form";
 import SpendingsList from "./spendings-list";
 import { SelectChangeEvent } from "@mui/material";
-import { createSpendingAsync } from "../../redux/actionCreators";
+import { createSpendingAsync, updateSpendingAsync } from "../../redux/actionCreators";
 import { useAppDispatch } from "../../redux/store";
 import { useEffect } from "react";
 
@@ -24,14 +24,9 @@ export default function Spendings() {
   }, []);
 
   const handleCategoryChange = (event: SelectChangeEvent) => {
-    if (!categories) {
-      return;
-    }
-
-    const category: ICategory | undefined = categories.find((category: ICategory) => category?.id?.toString() === event.target.value);
     dispatch({
       type: 'FORM_CATEGORY_CHANGE',
-      payload: category,
+      payload: event.target.value,
     })
   };
 
@@ -54,15 +49,7 @@ export default function Spendings() {
   }
 
   const handleUpdateButtonClick = () => {
-    dispatch({
-      type: 'UPDATE_SPENDING',
-      payload: {
-        id: spendingForm.id,
-        cost: spendingForm.cost,
-        comment: spendingForm.comment,
-        category: spendingForm.category,
-      }
-    });
+    dispatch(updateSpendingAsync(spendingForm))
   }
 
   return (

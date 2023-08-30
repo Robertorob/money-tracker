@@ -9,3 +9,10 @@ export interface Spending {
   comment: string;
   category: SpendingCategory;
 }
+
+export interface UpdateSpending {
+  id: number;
+  cost: number;
+  comment: string;
+  categoryId: number;
+}

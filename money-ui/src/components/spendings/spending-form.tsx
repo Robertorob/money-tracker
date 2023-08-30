@@ -22,7 +22,7 @@ export interface ISpendingForm {
 }
 
 export interface ICategory {
-  id: number;
+  id: number | null | undefined;
   name: string;
 }
 
@@ -45,13 +45,13 @@ export default function SpendingForm(props: ISpendingFormProps) {
       <FormControl fullWidth sx={{ marginTop: '1em', marginBottom: '1em' }}>
         <InputLabel>Category</InputLabel>
         <Select
-          value={props.form.category?.id?.toString()}
+          value={props.form.category?.id?.toString() ?? 0}
           label="Category"
           onChange={props.onCategoryChange}
         >
           {
             props.categories.map((category: ICategory)=> (
-              <MenuItem value={category.id.toString()}>{category?.name}</MenuItem>
+              <MenuItem value={category.id?.toString()}>{category?.name}</MenuItem>
             ))
           }
         </Select>
