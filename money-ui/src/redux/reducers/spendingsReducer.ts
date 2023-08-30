@@ -39,38 +39,24 @@ export const spendingsReducer = (state = initialState, action: AnyAction): any =
         spendings: [ action.payload, ...state.spendings ],
       }
     case 'UPDATE_SPENDING':
-      const updatedSpending = state.spendings.filter(spending => spending.id === action.payload.id);
-
-      if (!updatedSpending)
-        throw new Error('Entity not found to update');
-
-      let newUpdatedSpending = { ...updatedSpending[0] };
-      newUpdatedSpending.cost = action.payload.cost;
-      newUpdatedSpending.comment = action.payload.comment;
-      newUpdatedSpending.category = action.payload.category;
-
-      let newSpendingsAfterUpdate = state.spendings.filter(spending => spending.id !== action.payload.id);
-      newSpendingsAfterUpdate.push(newUpdatedSpending);
-      newSpendingsAfterUpdate = newSpendingsAfterUpdate.sort((a: any, b: any) => a.id > b.id ? 1: -1);
-
-      return {
-        ...state,
-        spendings: [...newSpendingsAfterUpdate],
-        spendingForm: {
-          ...initialState.spendingForm
-        }
-      }
+      return { 
+        ...state, 
+        spendings: state.spendings.map(
+          (spending) => spending.id === action.payload.id ? 
+          {
+            ...spending, 
+            cost: action.payload.cost,
+            comment: action.payload.comment,
+            category: action.payload.category,
+          } : spending
+        )
+     }
     case 'SEND_SPENDING_TO_FORM':
       let spendingToSend = state.spendings.filter(spending => spending.id === action.payload)[0];
 
-      let newSpendingForm: ISpendingForm = {
-        ...spendingToSend,
-        isUpdate: true,
-      }
-
       return {
         ...state,
-        spendingForm: {...state.spendingForm, ...newSpendingForm }
+        spendingForm: {...state.spendingForm, ...spendingToSend, isUpdate: true }
       }
     case 'FORM_COMMENT_CHANGE':
       return {

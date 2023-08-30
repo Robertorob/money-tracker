@@ -6,11 +6,7 @@ import { createSpendingAsync } from "../../redux/actionCreators";
 import { useAppDispatch } from "../../redux/store";
 import { useEffect } from "react";
 
-interface SpendingsProps {
-  children?: any,
-}
-
-export default function Spendings(props: any) {
+export default function Spendings() {
   const spendingForm = useSelector((state: any) => state.spendings.spendingForm);
   const categories = useSelector((state: any) => state.spendings.categories);
 
@@ -61,14 +57,13 @@ export default function Spendings(props: any) {
     dispatch({
       type: 'UPDATE_SPENDING',
       payload: {
-        id: props.form.id,
-        cost: props.form.cost,
-        comment: props.form.comment,
-        category: props.form.category,
+        id: spendingForm.id,
+        cost: spendingForm.cost,
+        comment: spendingForm.comment,
+        category: spendingForm.category,
       }
     });
   }
-
 
   return (
     <>
