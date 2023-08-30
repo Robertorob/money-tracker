@@ -71,7 +71,6 @@ export const spendingsReducer = (state = initialState, action: AnyAction): any =
         spendingForm: {...state.spendingForm, cost: action.payload }
       }
     case 'FORM_CATEGORY_CHANGE':
-      debugger;
       return {
         ...state,
         spendingForm: {...state.spendingForm, category: state.categories.filter(category => action.payload === category.id?.toString())[0] }
@@ -81,6 +80,17 @@ export const spendingsReducer = (state = initialState, action: AnyAction): any =
         ...state,
         spendings: state.spendings.filter(spending => spending.id !== action.payload),
       }
+    case 'EXPAND_SPENDING':
+      return { 
+        ...state, 
+        spendings: state.spendings.map(
+          (spending) => spending.id === action.payload ?
+          {
+            ...spending, 
+            expanded: !spending.expanded,
+          } : spending
+        ),
+     }
     default:
       return state;
   }

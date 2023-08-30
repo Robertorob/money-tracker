@@ -8,6 +8,7 @@ export interface Spending {
   cost: number;
   comment: string;
   category: SpendingCategory;
+  expanded: boolean | null | undefined;
 }
 
 export interface UpdateSpending {
