@@ -73,7 +73,12 @@ public class SpendingsService : ISpendingsService
   {
     _logger.LogInformation("Get spendings.");
 
-    var entities = await _context.Spendings.Include(spending => spending.Category).Take(10).AsNoTracking().ToListAsync();
+    var entities = await _context.Spendings
+      .OrderByDescending(spending =>  spending.Id)
+      .Include(spending => spending.Category)
+      .Take(10)
+      .AsNoTracking()
+      .ToListAsync();
 
     return new()
     {
