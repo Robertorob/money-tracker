@@ -3,8 +3,6 @@ import logo from './logo.svg';
 import './hello-page.css';
 
 const HelloPage = () => {
-
-
   return (
     <div className="hello-page">
       <header className="hello-page-header">

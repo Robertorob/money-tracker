@@ -7,7 +7,6 @@ interface SpendingsState {
   spendingForm: ISpendingForm;
   spendings: any[];
   categories: ICategory[];
-  createId: number; // DELETE AFTER IMPLEMENTING REAL CREATE WITH DATABASE
 }
 
 const initialState: SpendingsState = {
@@ -20,29 +19,24 @@ const initialState: SpendingsState = {
   },
   spendings: [],
   categories: [],
-  createId: 100,
 }
 
 export const spendingsReducer = (state = initialState, action: AnyAction): any => {
   switch (action.type) {
     case 'FETCH_CATEGORIES':
-      debugger;
       return {
         ...state,
         categories: action.payload,
       }
     case 'FETCH_SPENDINGS':
-      debugger;
       return {
         ...state,
         spendings: action.payload,
       }
     case 'CREATE_SPENDING':
-      const createId = state.createId;
       return {
         ...state,
-        spendings: [...state.spendings, { ...action.payload, createId }],
-        createId: state.createId + 1,
+        spendings: [ action.payload, ...state.spendings ],
       }
     case 'UPDATE_SPENDING':
       const updatedSpending = state.spendings.filter(spending => spending.id === action.payload.id);

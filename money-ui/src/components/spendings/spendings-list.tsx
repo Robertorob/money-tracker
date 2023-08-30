@@ -56,7 +56,7 @@ export default function SpendingsList(props: SpendingsListProps) {
         <Grid item xs={1} md={1} lg={1}></Grid>
         <Grid item xs={1} md={1} lg={1}></Grid>
 
-        {state.spendings.map((spending: any) => 
+        {state.spendings.map((spending: any) =>
           <>
             <Grid item xs={3} md={3} lg={3}>
               <Typography mt={2}>{spending.cost}</Typography>
