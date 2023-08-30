@@ -49,6 +49,8 @@ export default function SpendingsList(props: SpendingsListProps) {
     })
   };
 
+  const menuButtonsGridHeight = 4;
+
   return <>
     {
       <Box sx={{ flexGrow: 1 }}>
@@ -82,16 +84,24 @@ export default function SpendingsList(props: SpendingsListProps) {
                   {spending.expanded ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={spending.expanded ?? false} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
+                  <Grid
+                    container
+                    direction="column"
+                    justifyContent="space-around"
+                    alignItems="start"
+                    spacing={2}
+                  >
+                    <Grid item xs={1}></Grid>
+                    <Grid item xs={menuButtonsGridHeight} md={menuButtonsGridHeight} lg={menuButtonsGridHeight}>
                       <Button sx={ maxWidthSx } onClick={() => updateButtonClickHandle(spending.id)} startIcon={<ModeIcon />} />
-                    </ListItemButton>
-                  </List>
-                  <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
+                    </Grid>
+                    <Grid item xs={2}></Grid>
+                    <Grid item xs={menuButtonsGridHeight} md={menuButtonsGridHeight} lg={menuButtonsGridHeight}>
                       <Button sx={maxWidthSx} onClick={() => deleteButtonClickHandle(spending.id)} startIcon={<DeleteIcon />} />
-                    </ListItemButton>
-                  </List>
+                    </Grid>
+                    <Grid item xs={1}></Grid>
+
+                  </Grid>
                 </Collapse>
               </Grid>
             </>
