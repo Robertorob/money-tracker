@@ -5,7 +5,9 @@ public interface ISpendingsService
 {
   Task<CreateSpendingResultDto> CreateSpendingAsync(CreateSpendingDto dto);
 
-  Task UpdateSpendingAsync();
+  Task UpdateSpendingAsync(UpdateSpendingDto dto);
+
+  Task DeleteSpendingAsync(long id);
 
   Task<GetSpendingsDto> GetSpendingAsync();
 

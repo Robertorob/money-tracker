@@ -30,9 +30,23 @@ public class SpendingsController : ControllerBase
     return await _spendingService.CreateSpendingAsync(dto);
   }
 
+  [HttpPost]
+  [Route("/updateSpending")]
+  public async Task UpdateSpendingAsync(UpdateSpendingDto dto)
+  {
+    await _spendingService.UpdateSpendingAsync(dto);
+  }
+
+  [HttpPost]
+  [Route("/deleteSpending/{id}")]
+  public async Task DeleteSpendingAsync(long id)
+  {
+    await _spendingService.DeleteSpendingAsync(id);
+  }
+
   [HttpGet]
   [Route("/getSpendings")]
-  public async Task<GetSpendingsDto> CreateSpendingAsync()
+  public async Task<GetSpendingsDto> GetSpendingAsync()
   {
     return await _spendingService.GetSpendingAsync();
   }

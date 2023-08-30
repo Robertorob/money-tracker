@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Money.BusinessLogic.Dto;
+using Money.BusinessLogic.Exceptions;
 using Money.BusinessLogic.Interfaces;
 using Money.DataAccess;
 using Money.DataAccess.Entities;
@@ -27,7 +28,7 @@ public class SpendingsService : ISpendingsService
   {
     _logger.LogInformation("Creating new spending.");
 
-    var categoryTask = _context.Categories.FindAsync(dto.CategoryId);
+    var category = await _context.Categories.FindAsync(dto.CategoryId);
 
     var entity = new DataAccess.Entities.Spending
     {
@@ -39,7 +40,6 @@ public class SpendingsService : ISpendingsService
     await _context.Spendings.AddAsync(entity);
     await _context.SaveChangesAsync();
 
-    var category = await categoryTask;
     return new()
     {
       Id = entity.Id,
@@ -57,7 +57,7 @@ public class SpendingsService : ISpendingsService
   {
     _logger.LogInformation("Get categories.");
 
-    var entities = await _context.Categories.AsNoTracking().ToListAsync();
+    var entities = await _context.Categories.OrderBy(category => category.Id).AsNoTracking().ToListAsync();
 
     return new()
     {
@@ -97,19 +97,38 @@ public class SpendingsService : ISpendingsService
     };
   }
 
-  public async Task UpdateSpendingAsync()
+  public async Task UpdateSpendingAsync(UpdateSpendingDto updateSpending)
   {
-    _logger.LogInformation("Updating spending");
+    _logger.LogInformation($"Update spending {updateSpending.Id}");
 
-    long spendingId = 0;
-    var entity = _context.Spendings.Where(meas => meas.Id == spendingId).SingleOrDefault();
+    var entity = _context.Spendings.Where(meas => meas.Id == updateSpending.Id).SingleOrDefault();
 
     if (entity is null)
     {
-      throw new Exception();
+      _logger.LogError($"Entity with id {updateSpending.Id} not found.");
+      throw new NotFoundException(updateSpending.Id);
     }
-    entity.Comment = "updated comment";
 
+    entity.Cost = updateSpending.Cost;
+    entity.Comment = updateSpending.Comment;
+    entity.CategoryId = updateSpending.CategoryId;
+
+    await _context.SaveChangesAsync();
+  }
+
+  public async Task DeleteSpendingAsync(long id)
+  {
+    _logger.LogInformation($"Delete spending {id}");
+
+    var entity = _context.Spendings.Where(meas => meas.Id == id).SingleOrDefault();
+
+    if (entity is null)
+    {
+      _logger.LogError($"Entity with id {id} not found.");
+      throw new NotFoundException(id);
+    }
+
+    _context.Remove(entity);
     await _context.SaveChangesAsync();
   }
 }
