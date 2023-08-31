@@ -35,6 +35,10 @@ export const spendingsReducer = (state = initialState, action: AnyAction): any =
       return {
         ...state,
         spendings: [ action.payload, ...state.spendings ],
+        spendingForm: {
+          ...initialState.spendingForm,
+          isUpdate: false,
+        }
       }
     case 'UPDATE_SPENDING':
       return { 
@@ -49,7 +53,7 @@ export const spendingsReducer = (state = initialState, action: AnyAction): any =
           } : spending
         ),
         spendingForm: {
-          ...state.spendingForm,
+          ...initialState.spendingForm,
           isUpdate: false,
         }
      }
