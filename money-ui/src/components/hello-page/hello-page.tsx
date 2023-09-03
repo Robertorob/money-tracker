@@ -9,10 +9,10 @@ const HelloPage = () => {
         <img src={logo} className="hello-page-logo" alt="logo" />
         <p>
           Web Application for money tracking.
-          <br/>
+          {/* <br/>
           Server URL: {process.env.REACT_APP_SERVER_URL}
           <br/>
-          Env: {process.env.NODE_ENV}
+          Env: {process.env.NODE_ENV} */}
         </p>
       </header>
     </div>)
