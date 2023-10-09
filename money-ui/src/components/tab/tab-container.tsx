@@ -29,13 +29,13 @@ export default function TabContainer(props: TabContainerlProps) {
     <Box sx={{ width: '100%' }}>
     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
       <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
-        {labels?.map((label, index) => (<Tab label={label} {...a11yProps(index)} />)) }
+        {labels?.map((label, index) => (<Tab key={index} label={label} {...a11yProps(index)} />)) }
       </Tabs>
     </Box>
     { 
       React.Children.map(children, (child, index) =>
-        <Container maxWidth={'md'} sx={{p: 0}}>
-          <TabPanel value={value} index={index}>
+        <Container key={index} maxWidth={'md'} sx={{p: 0}}>
+          <TabPanel key={index} value={value} index={index}>
             {child}
           </TabPanel>
         </Container>)

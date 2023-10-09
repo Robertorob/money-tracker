@@ -5,16 +5,16 @@ import './hello-page.css';
 const HelloPage = () => {
   return (
     <div className="hello-page">
-      <header className="hello-page-header">
+      <h1 className="hello-page-header">
         <img src={logo} className="hello-page-logo" alt="logo" />
-        <p>
+        <div>
           Web Application for money tracking.
           <br/>
           Server URL: {process.env.REACT_APP_SERVER_URL}
           <br/>
           Env: {process.env.NODE_ENV}
-        </p>
-      </header>
+        </div>
+      </h1>
     </div>)
 }
 

@@ -5,14 +5,14 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Link } from '@mui/material';
+import { Avatar, Link } from '@mui/material';
 import ContactField from './contact-field';
 
 export default function Contacts() {
   return (
-    <>
-      <Card sx={{ minWidth: 275 }}>
+    <Card sx={{ minWidth: 275 }}>
       <CardContent>
+        <Avatar alt="Robert Akhmetshin" src="/public/avatar.jpg" />
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Akhmetshin Robert
         </Typography>
@@ -24,6 +24,5 @@ export default function Contacts() {
         <ContactField name='LinkedIn' link='www.linkedin.com/in/robert-akhmetshin-2b97a6284' value='Robert Akhmetshin' />
       </CardContent>
     </Card>
-    </>
   )
 }
