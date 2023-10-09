@@ -1,18 +1,23 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Avatar, Link } from '@mui/material';
 import ContactField from './contact-field';
+import Avatar from '@mui/material/Avatar';
+import Grid from '@mui/material/Grid';
 
 export default function Contacts() {
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
-        <Avatar alt="Robert Akhmetshin" src="/public/avatar.jpg" />
+        <Grid
+          container
+          direction="row-reverse"
+          justifyContent="center"
+          alignItems="center"
+          sx={{'margin-bottom': '1em'}}
+        >
+          <Avatar alt="Robert Akhmetshin" src={require('../../avatar.jpg')} sx={{ width: 150, height: 150 }} />
+        </Grid>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Akhmetshin Robert
         </Typography>
