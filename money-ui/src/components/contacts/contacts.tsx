@@ -21,7 +21,7 @@ export default function Contacts() {
         <ContactField name='Telegram' link='https://t.me/robertorob' value='robertorob' />
         <ContactField name='GitHub' link='https://github.com/Robertorob/money-tracker' value='Robertorob/money-tracker' />
         <ContactField name='DockerHub' link='https://hub.docker.com/repositories/robertorob3' value='robertorob3' />
-        <ContactField name='LinkedIn' link='www.linkedin.com/in/robert-akhmetshin-2b97a6284' value='Robert Akhmetshin' />
+        <ContactField name='LinkedIn' link='https://www.linkedin.com/in/robert-akhmetshin-2b97a6284/' value='Robert Akhmetshin' />
       </CardContent>
     </Card>
   )
