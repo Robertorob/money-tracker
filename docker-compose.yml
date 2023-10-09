@@ -21,7 +21,7 @@ services:
      - ./money-backend/appsettings.override.json:/publish/appsettings.json
   ui:
     restart: always
-    image: robertorob3/money-ui:1.2.0
+    image: robertorob3/money-ui:1.2.1
     container_name: money-ui
     ports:
       - "80:80"
