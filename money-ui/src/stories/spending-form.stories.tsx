@@ -14,12 +14,12 @@ const meta: Meta<typeof SpendingForm> = {
 export default meta;
 type Story = StoryObj<typeof SpendingForm>;
 
-let initialCategory: ICategory = {
+const initialCategory: ICategory = {
   id: 0,
   name: "Food"
 }
 
-let categories: ICategory[] = [
+const categories: ICategory[] = [
   initialCategory,
   {
     id: 1,
@@ -27,7 +27,7 @@ let categories: ICategory[] = [
   }
 ]
 
-let spendingForm: ISpendingForm = {
+const spendingForm: ISpendingForm = {
   id: 0,
   cost: 0,
   comment: '',
@@ -35,7 +35,7 @@ let spendingForm: ISpendingForm = {
   isUpdate: false,
 }
 
-let spendingFormProps: ISpendingFormProps = {
+const spendingFormProps: ISpendingFormProps = {
   categories: categories,
   form: spendingForm,
   onCostChange: undefined,

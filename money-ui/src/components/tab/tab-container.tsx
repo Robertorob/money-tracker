@@ -5,7 +5,7 @@ import Tab from '@mui/material/Tab';
 import TabPanel from './tab-panel';
 import { Container } from '@mui/material';
 
-interface TabContainerlProps {
+export interface ITabContainerProps {
   children?: React.ReactNode;
   labels?: string[];
 }
@@ -17,7 +17,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function TabContainer(props: TabContainerlProps) {
+export default function TabContainer(props: ITabContainerProps) {
   const { children, labels } = props;
   const [value, setValue] = React.useState(0);
   
