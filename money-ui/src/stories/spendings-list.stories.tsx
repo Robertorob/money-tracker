@@ -1,31 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { State, Store } from "@sambego/storybook-state";
 
 import SpendingsList, { ISpendingsListProps } from '../components/spendings/spendings-list';
 
-const meta: Meta<typeof SpendingsList> = {
-  title: 'Spendings/Spendings List',
-  component: SpendingsList,
-  tags: ['autodocs'],
-  argTypes: {
-  },
-} satisfies Meta<typeof SpendingsList>;
-
-export default meta;
-type Story = StoryObj<typeof SpendingsList>;
-
-const storyProps: ISpendingsListProps = {
+const store = new Store({
   spendings:
   [
     {
       id: 1,
-      cost: 1,
+      cost: 100,
       comment: 'comment 1',
       category: { id: 1, name: 'category name'},
-      expanded: true,
+      expanded: false,
     },
     {
       id: 2,
-      cost: 2,
+      cost: 200,
       comment: 'comment 2',
       category: { id: 2, name: 'category name 2'},
       expanded: false,
@@ -34,13 +24,36 @@ const storyProps: ISpendingsListProps = {
   deleteHandler: () => {},
   updateHandler: () => {},
   expandHandler: (id: number) => {
-    
+    store.set(
+    { 
+      spendings: store.get('spendings').map(spending => spending.id === id ?
+        {
+          ...spending, 
+          expanded: !spending.expanded,
+        } : spending)
+    });
   },
-}
+});
 
-export const SpendingListStory: Story = {
-  name: 'SpendingListStory',
-  args: {
-    ...storyProps
-  }
+const SpendingsListStoryWithState = (props: ISpendingsListProps) => (
+  <State store={store}>
+    <SpendingsList
+      {...props}
+    />
+  </State>
+);
+
+const meta: Meta<typeof SpendingsListStoryWithState> = {
+  title: 'Spendings/SpendingsList',
+  component: SpendingsListStoryWithState,
+  tags: ['autodocs'],
+  argTypes: {
+  },
+} satisfies Meta<typeof SpendingsListStoryWithState>;
+
+export default meta;
+type Story = StoryObj<typeof SpendingsListStoryWithState>;
+
+export const SpendingsListStory: Story = {
+  name: 'SpendingsListStory',
 };
