@@ -16,11 +16,12 @@ type Story = StoryObj<typeof TabContainer>;
 
 const tabContainerProps: ITabContainerProps = {
   children: <div>Children</div>,
-  labels: ['Child1']
+  labels: ['Tab']
 }
 
 const twoTabsContainerProps: ITabContainerProps = {
-  labels: ['Child1', 'Child2']
+  labels: ['Tab 1', 'Tab 2'],
+  children: [<div>Children 1</div>, <div>Children 2</div>],
 }
 
 export const OneTab: Story = {
@@ -32,23 +33,7 @@ export const OneTab: Story = {
 
 export const TwoTabs: Story = {
   name: 'Two tabs',
-  // args: {
-  //   ...twoTabsContainerProps
-  // },
-  argTypes: {
-    children: {
-      options: ['Child1', 'Child2'],
-      mapping: {
-        Child1: <span>Normal</span>,
-        Child2: <b>Bold</b>,
-      },
-    },
-    labels: {
-      options: ['Child1', 'Child2'],
-      mapping: {
-        Child1: 'Child1',
-        Child2: 'Child2',
-      },
-    },
+  args: {
+    ...twoTabsContainerProps
   },
 };
