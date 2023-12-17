@@ -1,6 +1,7 @@
-import { Spending, UpdateSpending } from "../classes/spending";
+import { ISpending, IUpdateSpending } from "../classes/spending";
+import { ISpendingForm } from "../components/spendings/spending-form";
 
-export function createSpendingAsync(spending: Spending) {
+export function createSpendingAsync(spending: ISpendingForm) {
   return async (dispatch: any, getState: any, { api }: any): Promise<any> => {
     const createSpending = {
       ...spending,
@@ -28,11 +29,11 @@ export function createSpendingAsync(spending: Spending) {
   }
 }
 
-export function updateSpendingAsync(spending: Spending) {
+export function updateSpendingAsync(spending: ISpendingForm) {
   return async (dispatch: any, getState: any, { api }: any): Promise<any> => {
-    const updateSpending: UpdateSpending = {
+    const updateSpending: IUpdateSpending = {
       ...spending,
-      categoryId: spending.category?.id,
+      categoryId: spending.category?.id!,
     }
 
     await fetch(`${process.env.REACT_APP_SERVER_URL}/updateSpending`, {

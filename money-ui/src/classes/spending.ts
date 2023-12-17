@@ -1,17 +1,17 @@
-export interface SpendingCategory {
+export interface ISpendingCategory {
   id: number;
   name: string;
 }
 
-export interface Spending {
+export interface ISpending {
   id: number;
   cost: number;
   comment: string;
-  category: SpendingCategory;
+  category: ISpendingCategory;
   expanded: boolean | null | undefined;
 }
 
-export interface UpdateSpending {
+export interface IUpdateSpending {
   id: number;
   cost: number;
   comment: string;

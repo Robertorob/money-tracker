@@ -1,20 +1,19 @@
-import { Button, Grid, Box, Typography, Select, ListItemButton, ListItemIcon, Collapse, List, ListItemText } from "@mui/material";
+import { Button, Grid, Box, Typography, Select, ListItemButton, ListItemIcon, Collapse, } from "@mui/material";
 import { useSelector } from "react-redux";
 import DeleteIcon from '@mui/icons-material/Delete';
 import ModeIcon from '@mui/icons-material/Mode';
 import '../tab/tab-panel.css';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { deleteSpendingAsync } from "../../redux/actionCreators";
 import { useAppDispatch } from "../../redux/store";
-import { ExpandLess, ExpandMore, StarBorder } from "@mui/icons-material";
-import MenuIcon from '@mui/icons-material/Menu';
-import { Spending } from "../../classes/spending";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { ISpending } from "../../classes/spending";
 
-interface SpendingsListProps {
-  children?: any;
+export interface ISpendingsListProps {
+  spendings: ISpending[];
 }
 
-export default function SpendingsList(props: SpendingsListProps) {
+export default function SpendingsList(props: ISpendingsListProps) {
   const state = useSelector((state: any) => state.spendings);
   const dispatch = useAppDispatch();
 
@@ -64,7 +63,7 @@ export default function SpendingsList(props: SpendingsListProps) {
                   <Typography fontWeight={'bold'} mt={2}>Category</Typography>
                 </Grid>
                 <Grid item xs={2} md={2} lg={2}></Grid>
-                {state.spendings.map((spending: Spending) =>
+                {props.spendings.map((spending: ISpending) =>
                   <>
                     <Grid item xs={3} md={3} lg={3}>
                       <Typography mt={2}>{spending.cost}</Typography>
@@ -77,9 +76,6 @@ export default function SpendingsList(props: SpendingsListProps) {
                     </Grid>
                     <Grid item xs={2} md={2} lg={2}>
                       <ListItemButton onClick={() => expandButtonClick(spending.id)}>
-                        {/* <ListItemIcon>
-                          <MenuIcon />
-                        </ListItemIcon> */}
                         {spending.expanded ? <ExpandLess /> : <ExpandMore />}
                       </ListItemButton>
                       <Collapse in={spending.expanded ?? false} timeout="auto" unmountOnExit>

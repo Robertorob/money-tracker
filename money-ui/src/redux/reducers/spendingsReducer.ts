@@ -1,13 +1,18 @@
 import { AnyAction } from "@reduxjs/toolkit";
 import { ICategory, ISpendingForm } from "../../components/spendings/spending-form";
+import { ISpending } from "../../classes/spending";
 
-interface SpendingsState {
+export interface IState {
+  spendings: ISpendingsState
+}
+
+export interface ISpendingsState {
   spendingForm: ISpendingForm;
-  spendings: any[];
+  spendings: ISpending[];
   categories: ICategory[];
 }
 
-const initialState: SpendingsState = {
+const initialState: ISpendingsState = {
   spendingForm: {
     id: 0,
     cost: 0,
