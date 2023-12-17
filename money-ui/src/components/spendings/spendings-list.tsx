@@ -51,63 +51,61 @@ export default function SpendingsList(props: SpendingsListProps) {
 
   const menuButtonsGridHeight = 4;
 
-  return <>
-    {
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={{ xs:1, md: 1, lg: 1 }}>
-          <Grid item xs={3} md={3} lg={3}>
-            <Typography fontWeight={'bold'} mt={2}>Cost</Typography>
-          </Grid>
-          <Grid item xs={4} md={4} lg={4}>
-            <Typography fontWeight={'bold'} mt={2}>Comment</Typography>
-          </Grid>
-          <Grid item xs={3} md={3} lg={3}>
-            <Typography fontWeight={'bold'} mt={2}>Category</Typography>
-          </Grid>
-          <Grid item xs={2} md={2} lg={2}></Grid>
-          {state.spendings.map((spending: Spending) =>
-            <>
-              <Grid item xs={3} md={3} lg={3}>
-                <Typography mt={2}>{spending.cost}</Typography>
-              </Grid>
-              <Grid item xs={4} md={4} lg={4}>
-                <Typography mt={2}>{spending.comment}</Typography>
-              </Grid>
-              <Grid item xs={3} md={3} lg={3}>
-                <Typography mt={2}>{spending.category?.name}</Typography>
-              </Grid>
-              <Grid item xs={2} md={2} lg={2}>
-                <ListItemButton onClick={() => expandButtonClick(spending.id)}>
-                  {/* <ListItemIcon>
-                    <MenuIcon />
-                  </ListItemIcon> */}
-                  {spending.expanded ? <ExpandLess /> : <ExpandMore />}
-                </ListItemButton>
-                <Collapse in={spending.expanded ?? false} timeout="auto" unmountOnExit>
-                  <Grid
-                    container
-                    direction="column"
-                    justifyContent="space-around"
-                    alignItems="start"
-                    spacing={2}
-                  >
-                    <Grid item xs={1}></Grid>
-                    <Grid item xs={menuButtonsGridHeight} md={menuButtonsGridHeight} lg={menuButtonsGridHeight}>
-                      <Button sx={ maxWidthSx } onClick={() => updateButtonClickHandle(spending.id)} startIcon={<ModeIcon />} />
+  return  <>
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container spacing={{ xs:1, md: 1, lg: 1 }}>
+                <Grid item xs={3} md={3} lg={3}>
+                  <Typography fontWeight={'bold'} mt={2}>Cost</Typography>
+                </Grid>
+                <Grid item xs={4} md={4} lg={4}>
+                  <Typography fontWeight={'bold'} mt={2}>Comment</Typography>
+                </Grid>
+                <Grid item xs={3} md={3} lg={3}>
+                  <Typography fontWeight={'bold'} mt={2}>Category</Typography>
+                </Grid>
+                <Grid item xs={2} md={2} lg={2}></Grid>
+                {state.spendings.map((spending: Spending) =>
+                  <>
+                    <Grid item xs={3} md={3} lg={3}>
+                      <Typography mt={2}>{spending.cost}</Typography>
                     </Grid>
-                    <Grid item xs={2}></Grid>
-                    <Grid item xs={menuButtonsGridHeight} md={menuButtonsGridHeight} lg={menuButtonsGridHeight}>
-                      <Button sx={maxWidthSx} onClick={() => deleteButtonClickHandle(spending.id)} startIcon={<DeleteIcon />} />
+                    <Grid item xs={4} md={4} lg={4}>
+                      <Typography mt={2}>{spending.comment}</Typography>
                     </Grid>
-                    <Grid item xs={1}></Grid>
+                    <Grid item xs={3} md={3} lg={3}>
+                      <Typography mt={2}>{spending.category?.name}</Typography>
+                    </Grid>
+                    <Grid item xs={2} md={2} lg={2}>
+                      <ListItemButton onClick={() => expandButtonClick(spending.id)}>
+                        {/* <ListItemIcon>
+                          <MenuIcon />
+                        </ListItemIcon> */}
+                        {spending.expanded ? <ExpandLess /> : <ExpandMore />}
+                      </ListItemButton>
+                      <Collapse in={spending.expanded ?? false} timeout="auto" unmountOnExit>
+                        <Grid
+                          container
+                          direction="column"
+                          justifyContent="space-around"
+                          alignItems="start"
+                          spacing={2}
+                        >
+                          <Grid item xs={1}></Grid>
+                          <Grid item xs={menuButtonsGridHeight} md={menuButtonsGridHeight} lg={menuButtonsGridHeight}>
+                            <Button sx={ maxWidthSx } onClick={() => updateButtonClickHandle(spending.id)} startIcon={<ModeIcon />} />
+                          </Grid>
+                          <Grid item xs={2}></Grid>
+                          <Grid item xs={menuButtonsGridHeight} md={menuButtonsGridHeight} lg={menuButtonsGridHeight}>
+                            <Button sx={maxWidthSx} onClick={() => deleteButtonClickHandle(spending.id)} startIcon={<DeleteIcon />} />
+                          </Grid>
+                          <Grid item xs={1}></Grid>
 
-                  </Grid>
-                </Collapse>
+                        </Grid>
+                      </Collapse>
+                    </Grid>
+                  </>
+                )}
               </Grid>
-            </>
-          )}
-        </Grid>
-      </Box>
-    }
-  </>
+            </Box>
+          </>
 }
