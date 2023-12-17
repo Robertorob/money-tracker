@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import SpendingForm, { ICategory } from "./spending-form";
 import SpendingsList from "./spendings-list";
 import { SelectChangeEvent } from "@mui/material";
-import { createSpendingAsync, updateSpendingAsync } from "../../redux/actionCreators";
+import { createSpendingAsync, deleteSpendingAsync, updateSpendingAsync } from "../../redux/actionCreators";
 import { useAppDispatch } from "../../redux/store";
 import { useEffect } from "react";
 import { IState } from "../../redux/reducers/spendingsReducer";
@@ -65,6 +65,24 @@ export default function Spendings() {
     dispatch(updateSpendingAsync(spendingForm))
   }
 
+  const deleteHandler = (id: number) => {
+    dispatch(deleteSpendingAsync(id))
+  }
+  
+  const updateHandler = (id: number) => {
+    dispatch({
+      type: 'SEND_SPENDING_TO_FORM',
+      payload: id,
+    });
+  }
+  
+  const expandHandler = (id: number) => {
+    dispatch({
+      type: 'EXPAND_SPENDING',
+      payload: id
+    })
+  };
+
   return (
     <>
       <SpendingForm 
@@ -74,8 +92,14 @@ export default function Spendings() {
         onCommentChange={handleCommentChange}
         onCategoryChange={handleCategoryChange}
         onUpdateButtonClick={handleUpdateButtonClick}
-        onCreateButtonClick={handleCreateButtonClick}  />
-      <SpendingsList spendings={spendings} />
+        onCreateButtonClick={handleCreateButtonClick}
+      />
+      <SpendingsList
+        spendings={spendings}
+        deleteHandler={deleteHandler}
+        updateHandler={updateHandler}
+        expandHandler={expandHandler}
+      />
     </>
   )
 }

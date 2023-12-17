@@ -14,7 +14,28 @@ export default meta;
 type Story = StoryObj<typeof SpendingsList>;
 
 const storyProps: ISpendingsListProps = {
-  spendings: []
+  spendings:
+  [
+    {
+      id: 1,
+      cost: 1,
+      comment: 'comment 1',
+      category: { id: 1, name: 'category name'},
+      expanded: true,
+    },
+    {
+      id: 2,
+      cost: 2,
+      comment: 'comment 2',
+      category: { id: 2, name: 'category name 2'},
+      expanded: false,
+    },
+  ],
+  deleteHandler: () => {},
+  updateHandler: () => {},
+  expandHandler: (id: number) => {
+    
+  },
 }
 
 export const SpendingListStory: Story = {
