@@ -1,4 +1,6 @@
+import { IUpdateCategory } from "../classes/category";
 import { ISpending, IUpdateSpending } from "../classes/spending";
+import { ICategoryForm } from "../components/categories/category-form";
 import { ISpendingForm } from "../components/spendings/spending-form";
 
 export function createSpendingAsync(spending: ISpendingForm) {
@@ -66,6 +68,78 @@ export function deleteSpendingAsync(id: number) {
     .then(() => {
       dispatch({
         type: 'DELETE_SPENDING',
+        payload: id,
+      });
+    })
+    .catch((err) => {
+        console.log(err.message);
+    });
+  }
+}
+
+export function createCategoryAsync(category: ICategoryForm) {
+  return async (dispatch: any, getState: any, { api }: any): Promise<any> => {
+    const createCategory = {
+      ...category,
+    }
+
+    await fetch(`${process.env.REACT_APP_SERVER_URL}/createCategory`, {
+      method: 'POST',
+      body: JSON.stringify(createCategory),
+      headers: {
+         'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      dispatch({
+        type: 'CREATE_CATEGORY',
+        payload: data
+      })
+    })
+    .catch((err) => {
+        console.log(err.message);
+    });
+
+  }
+}
+
+export function updateCategoryAsync(category: ICategoryForm) {
+  return async (dispatch: any, getState: any, { api }: any): Promise<any> => {
+    const updateCategory: IUpdateCategory = {
+      ...category,
+    }
+
+    await fetch(`${process.env.REACT_APP_SERVER_URL}/updateCategory`, {
+      method: 'POST',
+      body: JSON.stringify(updateCategory),
+      headers: {
+         'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+    .then(() => {
+      dispatch({
+        type: 'UPDATE_CATEGORY',
+        payload: category
+      })
+    })
+    .catch((err) => {
+        console.log(err.message);
+    });
+  }
+}
+
+export function deleteCategoryAsync(id: number) {
+  return async (dispatch: any, getState: any, { api }: any): Promise<any> => {
+    await fetch(`${process.env.REACT_APP_SERVER_URL}/deleteCategory/${id}`, {
+      method: 'POST',
+      headers: {
+         'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+    .then(() => {
+      dispatch({
+        type: 'DELETE_CATEGORY',
         payload: id,
       });
     })

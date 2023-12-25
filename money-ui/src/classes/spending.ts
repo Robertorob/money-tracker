@@ -1,13 +1,10 @@
-export interface ISpendingCategory {
-  id: number;
-  name: string;
-}
+import { ICategory } from "./category";
 
 export interface ISpending {
   id: number;
   cost: number;
   comment: string;
-  category: ISpendingCategory;
+  category: ICategory;
   expanded: boolean | null | undefined;
 }
 

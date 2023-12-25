@@ -1,9 +1,11 @@
 import { AnyAction } from "@reduxjs/toolkit";
 import { ICategory, ISpendingForm } from "../../components/spendings/spending-form";
 import { ISpending } from "../../classes/spending";
+import { ICategoriesState } from "./categoriesReducer";
 
 export interface IState {
   spendings: ISpendingsState
+  categories: ICategoriesState
 }
 
 export interface ISpendingsState {

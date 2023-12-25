@@ -2,11 +2,13 @@ import { configureStore } from '@reduxjs/toolkit'
 import { spendingsReducer } from './reducers/spendingsReducer'
 import ApiService from '../services/api'
 import { useDispatch } from 'react-redux'
+import { categoriesReducer } from './reducers/categoriesReducer'
 // ...
 
 const store = configureStore({
   reducer: {
     spendings: spendingsReducer,
+    categories: categoriesReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
