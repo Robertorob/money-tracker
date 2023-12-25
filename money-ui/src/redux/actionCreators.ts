@@ -10,7 +10,7 @@ export function createSpendingAsync(spending: ISpendingForm) {
       categoryId: spending.category?.id === 0 ? null : spending.category?.id,
     }
 
-    await fetch(`${process.env.REACT_APP_SERVER_URL}/createSpending`, {
+    await fetch(`${process.env.REACT_APP_SERVER_URL}/spendings/create`, {
       method: 'POST',
       body: JSON.stringify(createSpending),
       headers: {
@@ -38,7 +38,7 @@ export function updateSpendingAsync(spending: ISpendingForm) {
       categoryId: spending.category?.id!,
     }
 
-    await fetch(`${process.env.REACT_APP_SERVER_URL}/updateSpending`, {
+    await fetch(`${process.env.REACT_APP_SERVER_URL}/spendings/update`, {
       method: 'POST',
       body: JSON.stringify(updateSpending),
       headers: {
@@ -59,7 +59,7 @@ export function updateSpendingAsync(spending: ISpendingForm) {
 
 export function deleteSpendingAsync(id: number) {
   return async (dispatch: any, getState: any, { api }: any): Promise<any> => {
-    await fetch(`${process.env.REACT_APP_SERVER_URL}/deleteSpending/${id}`, {
+    await fetch(`${process.env.REACT_APP_SERVER_URL}/spendings/delete/${id}`, {
       method: 'POST',
       headers: {
          'Content-type': 'application/json; charset=UTF-8',
@@ -83,7 +83,7 @@ export function createCategoryAsync(category: ICategoryForm) {
       ...category,
     }
 
-    await fetch(`${process.env.REACT_APP_SERVER_URL}/createCategory`, {
+    await fetch(`${process.env.REACT_APP_SERVER_URL}/categories/create`, {
       method: 'POST',
       body: JSON.stringify(createCategory),
       headers: {
@@ -110,7 +110,7 @@ export function updateCategoryAsync(category: ICategoryForm) {
       ...category,
     }
 
-    await fetch(`${process.env.REACT_APP_SERVER_URL}/updateCategory`, {
+    await fetch(`${process.env.REACT_APP_SERVER_URL}/categories/update`, {
       method: 'POST',
       body: JSON.stringify(updateCategory),
       headers: {
@@ -131,7 +131,7 @@ export function updateCategoryAsync(category: ICategoryForm) {
 
 export function deleteCategoryAsync(id: number) {
   return async (dispatch: any, getState: any, { api }: any): Promise<any> => {
-    await fetch(`${process.env.REACT_APP_SERVER_URL}/deleteCategory/${id}`, {
+    await fetch(`${process.env.REACT_APP_SERVER_URL}/categories/delete/${id}`, {
       method: 'POST',
       headers: {
          'Content-type': 'application/json; charset=UTF-8',

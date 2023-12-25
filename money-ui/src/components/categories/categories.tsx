@@ -14,7 +14,7 @@ export default function Categories() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_URL}/getCategories`)
+    fetch(`${process.env.REACT_APP_SERVER_URL}/categories/list`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({ type: 'FETCH_CATEGORIES', payload: data.categories })

@@ -39,9 +39,7 @@ export const categoriesReducer = (state = initialState, action: AnyAction): any 
           (category) => category.id === action.payload.id ? 
           {
             ...category, 
-            cost: action.payload.cost,
-            comment: action.payload.comment,
-            category: action.payload.category,
+            name: action.payload.name,
           } : category
         ),
         categoryForm: {
