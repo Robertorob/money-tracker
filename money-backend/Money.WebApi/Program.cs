@@ -21,7 +21,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services
-  .AddTransient<ISpendingsService, SpendingsService>();
+  .AddTransient<ISpendingsService, SpendingsService>()
+  .AddTransient<ICategoriesService, CategoriesService>();
 
 builder.Services.AddCors(options =>
 {

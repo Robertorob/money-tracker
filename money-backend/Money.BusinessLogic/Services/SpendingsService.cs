@@ -1,7 +1,8 @@
 ﻿using Humanizer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Money.BusinessLogic.Dto;
+using Money.BusinessLogic.Dto.Category;
+using Money.BusinessLogic.Dto.Spending;
 using Money.BusinessLogic.Exceptions;
 using Money.BusinessLogic.Interfaces;
 using Money.DataAccess;
@@ -53,23 +54,7 @@ public class SpendingsService : ISpendingsService
     };
   }
 
-  public async Task<GetCategoriesDto> GetCategoriesAsync()
-  {
-    _logger.LogInformation("Get categories.");
-
-    var entities = await _context.Categories.OrderBy(category => category.Id).AsNoTracking().ToListAsync();
-
-    return new()
-    {
-      Categories = entities.Select(entity => new GetCategoryDto
-      {
-        Id = entity.Id,
-        Name = entity.Name,
-      }).ToList(),
-    };
-  }
-
-  public async Task<GetSpendingsDto> GetSpendingAsync()
+  public async Task<GetSpendingsDto> GetSpendingsAsync()
   {
     _logger.LogInformation("Get spendings.");
 

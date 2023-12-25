@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
-using Money.BusinessLogic.Dto;
+using Money.BusinessLogic.Dto.Category;
+using Money.BusinessLogic.Dto.Spending;
 using Money.BusinessLogic.Interfaces;
 
 namespace Money.WebApi.Controllers;
 [ApiController]
-[Route("[controller]")]
+[Route("spendings")]
 public class SpendingsController : ControllerBase
 {
   private readonly ILogger<SpendingsController> _logger;
@@ -17,44 +18,37 @@ public class SpendingsController : ControllerBase
   }
 
   [HttpGet]
-  [Route("/isAlive")]
+  [Route("isAlive")]
   public string IsAlive()
   {
     return "Alive";
   }
 
   [HttpPost]
-  [Route("/createSpending")]
+  [Route("create")]
   public async Task<CreateSpendingResultDto> CreateSpendingAsync(CreateSpendingDto dto)
   {
     return await _spendingService.CreateSpendingAsync(dto);
   }
 
   [HttpPost]
-  [Route("/updateSpending")]
+  [Route("update")]
   public async Task UpdateSpendingAsync(UpdateSpendingDto dto)
   {
     await _spendingService.UpdateSpendingAsync(dto);
   }
 
   [HttpPost]
-  [Route("/deleteSpending/{id}")]
+  [Route("delete/{id}")]
   public async Task DeleteSpendingAsync(long id)
   {
     await _spendingService.DeleteSpendingAsync(id);
   }
 
   [HttpGet]
-  [Route("/getSpendings")]
+  [Route("list")]
   public async Task<GetSpendingsDto> GetSpendingAsync()
   {
-    return await _spendingService.GetSpendingAsync();
-  }
-
-  [HttpGet]
-  [Route("/getCategories")]
-  public async Task<GetCategoriesDto> GetCategoriesAsync()
-  {
-    return await _spendingService.GetCategoriesAsync();
+    return await _spendingService.GetSpendingsAsync();
   }
 }

@@ -1,4 +1,6 @@
-﻿using Money.BusinessLogic.Dto;
+﻿using Money.BusinessLogic.Dto.Category;
+using Money.BusinessLogic.Dto.Spending;
+
 namespace Money.BusinessLogic.Interfaces;
 
 public interface ISpendingsService
@@ -9,7 +11,5 @@ public interface ISpendingsService
 
   Task DeleteSpendingAsync(long id);
 
-  Task<GetSpendingsDto> GetSpendingAsync();
-
-  Task<GetCategoriesDto> GetCategoriesAsync();
+  Task<GetSpendingsDto> GetSpendingsAsync();
 }
