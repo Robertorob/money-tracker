@@ -85,7 +85,7 @@ export default function Spendings() {
 
   return (
     <>
-      <SpendingForm 
+      <SpendingForm
         categories={categories}
         form={spendingForm}
         onCostChange={handleCostChange}

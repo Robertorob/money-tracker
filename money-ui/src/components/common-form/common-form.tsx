@@ -38,11 +38,11 @@ export default function CommonForm(props: ICommonFormProps) {
     <FormGroup sx={formGroupSx}>
       {
         props.fields.map((field: IField)=> (
-          !field.selectOptions ?
+          !field.selectOptions &&
             <FormControl fullWidth sx={formControlSx}>
               <TextField value={field.value} label={field.label} onChange={field.onChange} type={field.type} variant="outlined"/>
             </FormControl>
-          :
+          ||
             <FormControl fullWidth sx={formControlSx}>
               <InputLabel>{field.label}</InputLabel>
               <Select
