@@ -12,5 +12,5 @@ export interface IUpdateSpending {
   id: number;
   cost: number;
   comment: string;
-  categoryId: number;
+  categoryId?: number | null;
 }

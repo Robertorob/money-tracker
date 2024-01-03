@@ -1,6 +1,4 @@
-import { Button, FormControl, FormGroup, InputLabel, MenuItem, Select, TextField } from "@mui/material";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import CommonForm from "../common-form/common-form";
 
 export interface ISpendingFormProps {
   children?: any;
@@ -35,34 +33,36 @@ export default function SpendingForm(props: ISpendingFormProps) {
   }
 
   return (
-    <FormGroup sx={formGroupSx}>
-      <FormControl fullWidth sx={{ marginTop: '1em' }}>
-        <TextField value={props.form.cost} label="Cost" variant="outlined" onChange={props.onCostChange} type="number" />
-      </FormControl>
-      <FormControl fullWidth sx={{ marginTop: '1em' }}>
-        <TextField value={props.form.comment} label="Comment" variant="outlined" onChange={props.onCommentChange} />
-      </FormControl>
-      <FormControl fullWidth sx={{ marginTop: '1em', marginBottom: '1em' }}>
-        <InputLabel>Category</InputLabel>
-        <Select
-          value={props.form.category?.id?.toString() ?? 0}
-          label="Category"
-          onChange={props.onCategoryChange}
-        >
-          {
-            props.categories.map((category: ICategory)=> (
-              <MenuItem value={category.id?.toString()}>{category?.name}</MenuItem>
-            ))
-          }
-        </Select>
-      </FormControl>
-        {props.form.isUpdate ? 
-          <FormControl>
-            <Button variant="contained" onClick={props.onUpdateButtonClick}>Update</Button>
-          </FormControl> : 
-        <FormControl>
-          <Button variant="contained" onClick={props.onCreateButtonClick}>Add</Button>
-        </FormControl>}
-    </FormGroup>
+    <CommonForm
+      fields={[
+        {
+          value: props.form.cost,
+          type: 'number',
+          label: 'Cost',
+          onChange: props.onCostChange,
+        },
+        {
+          value: props.form.comment,
+          type: 'string',
+          label: 'Comment',
+          onChange: props.onCommentChange,
+        },
+        {
+          value: props.form.category.id,
+          type: 'select',
+          label: 'Category',
+          onChange: props.onCategoryChange,
+          selectOptions: props.categories.map((category: ICategory) => {
+            return {
+              value: category?.id,
+              label: category?.name,
+            }
+          }),
+        },
+      ]}
+      isUpdate={props.form.isUpdate}
+      onUpdateButtonClick={props.onUpdateButtonClick}
+      onCreateButtonClick={props.onCreateButtonClick}
+    />
   )
 }
