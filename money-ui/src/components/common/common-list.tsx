@@ -5,46 +5,48 @@ import '../tab/tab-panel.css';
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { ISpending } from "../../classes/spending";
 
-export interface ISpendingsListProps {
-  spendings: ISpending[];
+export interface ICommonListProps {
+  items: any[];
+  columns: IColumn[];
   deleteHandler: (id: number) => void
   updateHandler: (id: number) => void
   expandHandler: (id: number) => void
 }
 
-export default function SpendingsList(props: ISpendingsListProps) {
+export interface IColumn {
+  label: string;
+  width: number;
+  fieldName: string;
+}
+
+export default function CommonList(props: ICommonListProps) {
   const maxWidthSx = {maxWidth: '40px', maxHeight: '40px', minWidth: '40px', minHeight: '40px', padding: '0'}
   const menuButtonsGridHeight = 4;
 
   return  <>
             <Box sx={{ flexGrow: 1 }}>
               <Grid container spacing={{ xs:1, md: 1, lg: 1 }}>
-                <Grid item xs={3} md={3} lg={3}>
-                  <Typography fontWeight={'bold'} mt={2}>Cost</Typography>
-                </Grid>
-                <Grid item xs={4} md={4} lg={4}>
-                  <Typography fontWeight={'bold'} mt={2}>Comment</Typography>
-                </Grid>
-                <Grid item xs={3} md={3} lg={3}>
-                  <Typography fontWeight={'bold'} mt={2}>Category</Typography>
-                </Grid>
+                {props.columns.map((column: IColumn) =>
+                  <Grid item xs={3} md={3} lg={3}>
+                    <Typography fontWeight={'bold'} mt={2}>{column.label}</Typography>
+                  </Grid>
+                )}
+
                 <Grid item xs={2} md={2} lg={2}></Grid>
-                {props.spendings.map((spending: ISpending) =>
+
+                {props.items.map((item: any) =>
                   <>
-                    <Grid item xs={3} md={3} lg={3}>
-                      <Typography mt={2}>{spending.cost}</Typography>
-                    </Grid>
-                    <Grid item xs={4} md={4} lg={4}>
-                      <Typography mt={2}>{spending.comment}</Typography>
-                    </Grid>
-                    <Grid item xs={3} md={3} lg={3}>
-                      <Typography mt={2}>{spending.category?.name}</Typography>
-                    </Grid>
+                    {props.columns.map((column: IColumn) =>
+                      <Grid item xs={column.width} md={column.width} lg={column.width}>
+                        <Typography mt={2}>{item[column.fieldName]}</Typography>
+                      </Grid>
+                    )}
+
                     <Grid item xs={2} md={2} lg={2}>
-                      <ListItemButton onClick={() => props.expandHandler(spending.id)}>
-                        {spending.expanded ? <ExpandLess /> : <ExpandMore />}
+                      <ListItemButton onClick={() => props.expandHandler(item.id)}>
+                        {item.expanded ? <ExpandLess /> : <ExpandMore />}
                       </ListItemButton>
-                      <Collapse in={spending.expanded ?? false} timeout="auto" unmountOnExit>
+                      <Collapse in={item.expanded ?? false} timeout="auto" unmountOnExit>
                         <Grid
                           container
                           direction="column"
@@ -54,17 +56,17 @@ export default function SpendingsList(props: ISpendingsListProps) {
                         >
                           <Grid item xs={1}></Grid>
                           <Grid item xs={menuButtonsGridHeight} md={menuButtonsGridHeight} lg={menuButtonsGridHeight}>
-                            <Button sx={ maxWidthSx } onClick={() => props.updateHandler(spending.id)} startIcon={<ModeIcon />} />
+                            <Button sx={ maxWidthSx } onClick={() => props.updateHandler(item.id)} startIcon={<ModeIcon />} />
                           </Grid>
                           <Grid item xs={2}></Grid>
                           <Grid item xs={menuButtonsGridHeight} md={menuButtonsGridHeight} lg={menuButtonsGridHeight}>
-                            <Button sx={maxWidthSx} onClick={() => props.deleteHandler(spending.id)} startIcon={<DeleteIcon />} />
+                            <Button sx={maxWidthSx} onClick={() => props.deleteHandler(item.id)} startIcon={<DeleteIcon />} />
                           </Grid>
                           <Grid item xs={1}></Grid>
-
                         </Grid>
                       </Collapse>
                     </Grid>
+                    
                   </>
                 )}
               </Grid>
