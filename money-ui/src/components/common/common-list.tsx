@@ -3,7 +3,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ModeIcon from '@mui/icons-material/Mode';
 import '../tab/tab-panel.css';
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { ISpending } from "../../classes/spending";
 
 export interface ICommonListProps {
   items: any[];
@@ -16,7 +15,7 @@ export interface ICommonListProps {
 export interface IColumn {
   label: string;
   width: number;
-  fieldName: string;
+  fieldNames: string[];
 }
 
 export default function CommonList(props: ICommonListProps) {
@@ -27,7 +26,7 @@ export default function CommonList(props: ICommonListProps) {
             <Box sx={{ flexGrow: 1 }}>
               <Grid container spacing={{ xs:1, md: 1, lg: 1 }}>
                 {props.columns.map((column: IColumn) =>
-                  <Grid item xs={3} md={3} lg={3}>
+                  <Grid item xs={column.width} md={column.width} lg={column.width}>
                     <Typography fontWeight={'bold'} mt={2}>{column.label}</Typography>
                   </Grid>
                 )}
@@ -36,11 +35,19 @@ export default function CommonList(props: ICommonListProps) {
 
                 {props.items.map((item: any) =>
                   <>
-                    {props.columns.map((column: IColumn) =>
-                      <Grid item xs={column.width} md={column.width} lg={column.width}>
-                        <Typography mt={2}>{item[column.fieldName]}</Typography>
-                      </Grid>
-                    )}
+                    {props.columns.map((column: IColumn) => {
+                      let columnFieldValue = item;
+                      column.fieldNames.some(fieldName => {
+                        if (!columnFieldValue || !Object.hasOwn(columnFieldValue, fieldName))
+                          return false;
+                        columnFieldValue = columnFieldValue[fieldName];
+                      });
+                      return (
+                        <Grid item xs={column.width} md={column.width} lg={column.width}>
+                          <Typography mt={2}>{columnFieldValue}</Typography>
+                        </Grid>
+                      )
+                    })}
 
                     <Grid item xs={2} md={2} lg={2}>
                       <ListItemButton onClick={() => props.expandHandler(item.id)}>
@@ -66,7 +73,7 @@ export default function CommonList(props: ICommonListProps) {
                         </Grid>
                       </Collapse>
                     </Grid>
-                    
+
                   </>
                 )}
               </Grid>
