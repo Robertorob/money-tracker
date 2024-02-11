@@ -1,6 +1,4 @@
 import { Button, FormControl, FormGroup, InputLabel, MenuItem, Select, TextField } from "@mui/material";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 export interface IField {
   value: any;
