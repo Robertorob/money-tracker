@@ -84,7 +84,7 @@ export const spendingsReducer = (state = initialState, action: AnyAction): any =
     case 'FORM_CATEGORY_CHANGE':
       return {
         ...state,
-        spendingForm: {...state.spendingForm, category: state.categories.filter(category => action.payload === category.id?.toString())[0] }
+        spendingForm: {...state.spendingForm, category: state.categories.filter(category => action.payload === category.id)[0] }
       }
     case 'DELETE_SPENDING':
       return {

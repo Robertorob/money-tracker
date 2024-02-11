@@ -41,14 +41,14 @@ export default function SpendingForm(props: ISpendingFormProps) {
           onChange: props.onCommentChange,
         },
         {
-          value: props.form.category?.id,
+          value: props.form.category?.id?.toString() ?? 0,
           type: 'select',
           label: 'Category',
           onChange: props.onCategoryChange,
           selectOptions: props.categories.map((category: ICategory) => {
             return {
-              value: category.id,
-              label: category.name,
+              value: category?.id,
+              label: category?.name,
             }
           }),
         },
