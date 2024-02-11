@@ -1,5 +1,5 @@
 import { ICategory } from "../spendings/spending-form";
-import CommonForm from "../common-form/common-form";
+import CommonForm from "../common/common-form";
 
 export interface ICategoryFormProps {
   children?: any;
