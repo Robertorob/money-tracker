@@ -10,6 +10,7 @@ export interface ICommonListProps {
   deleteHandler: (id: number) => void
   updateHandler: (id: number) => void
   expandHandler: (id: number) => void
+  menuWidth?: number;
 }
 
 export interface IColumn {
@@ -21,6 +22,7 @@ export interface IColumn {
 export default function CommonList(props: ICommonListProps) {
   const maxWidthSx = {maxWidth: '40px', maxHeight: '40px', minWidth: '40px', minHeight: '40px', padding: '0'}
   const menuButtonsGridHeight = 4;
+  const menuWidth = props.menuWidth ?? 2;
 
   return  <>
             <Box sx={{ flexGrow: 1 }}>
@@ -49,7 +51,7 @@ export default function CommonList(props: ICommonListProps) {
                       )
                     })}
 
-                    <Grid item xs={2} md={2} lg={2}>
+                    <Grid item xs={menuWidth} md={menuWidth} lg={menuWidth}>
                       <ListItemButton onClick={() => props.expandHandler(item.id)}>
                         {item.expanded ? <ExpandLess /> : <ExpandMore />}
                       </ListItemButton>
