@@ -25,9 +25,9 @@ export default function SpendingsList(props: ISpendingsListProps) {
                   fieldNames: ['comment'],
                 },
                 {
-                  label: 'Category',
+                  label: 'Tag',
                   width: 3,
-                  fieldNames: ['category', 'name'],
+                  fieldNames: ['tag', 'name'],
                 },
               ]}
               deleteHandler={props.deleteHandler}

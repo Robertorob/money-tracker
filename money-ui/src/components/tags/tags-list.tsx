@@ -3,16 +3,16 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ModeIcon from '@mui/icons-material/Mode';
 import '../tab/tab-panel.css';
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { ICategory } from "../../classes/category";
+import { ITag } from "../../classes/tag";
 
-export interface ICategoriesListProps {
-  categories: ICategory[];
+export interface ITagsListProps {
+  tags: ITag[];
   deleteHandler: (id: number) => void
   updateHandler: (id: number) => void
   expandHandler: (id: number) => void
 }
 
-export default function CategoriesList(props: ICategoriesListProps) {
+export default function TagsList(props: ITagsListProps) {
   const maxWidthSx = {maxWidth: '40px', maxHeight: '40px', minWidth: '40px', minHeight: '40px', padding: '0'}
   const menuButtonsGridHeight = 4;
 
@@ -23,16 +23,16 @@ export default function CategoriesList(props: ICategoriesListProps) {
                   <Typography fontWeight={'bold'} mt={2}>Name</Typography>
                 </Grid>
                 <Grid item xs={6} md={6} lg={6}></Grid>
-                {props.categories.map((category: ICategory) =>
+                {props.tags.map((tag: ITag) =>
                   <>
                     <Grid item xs={6} md={6} lg={6}>
-                      <Typography mt={2}>{category.name}</Typography>
+                      <Typography mt={2}>{tag.name}</Typography>
                     </Grid>
                     <Grid item xs={6} md={6} lg={6}>
-                      <ListItemButton onClick={() => props.expandHandler(category.id)}>
-                        {category.expanded ? <ExpandLess /> : <ExpandMore />}
+                      <ListItemButton onClick={() => props.expandHandler(tag.id)}>
+                        {tag.expanded ? <ExpandLess /> : <ExpandMore />}
                       </ListItemButton>
-                      <Collapse in={category.expanded ?? false} timeout="auto" unmountOnExit>
+                      <Collapse in={tag.expanded ?? false} timeout="auto" unmountOnExit>
                         <Grid
                           container
                           direction="column"
@@ -42,11 +42,11 @@ export default function CategoriesList(props: ICategoriesListProps) {
                         >
                           <Grid item xs={1}></Grid>
                           <Grid item xs={menuButtonsGridHeight} md={menuButtonsGridHeight} lg={menuButtonsGridHeight}>
-                            <Button sx={ maxWidthSx } onClick={() => props.updateHandler(category.id)} startIcon={<ModeIcon />} />
+                            <Button sx={ maxWidthSx } onClick={() => props.updateHandler(tag.id)} startIcon={<ModeIcon />} />
                           </Grid>
                           <Grid item xs={2}></Grid>
                           <Grid item xs={menuButtonsGridHeight} md={menuButtonsGridHeight} lg={menuButtonsGridHeight}>
-                            <Button sx={maxWidthSx} onClick={() => props.deleteHandler(category.id)} startIcon={<DeleteIcon />} />
+                            <Button sx={maxWidthSx} onClick={() => props.deleteHandler(tag.id)} startIcon={<DeleteIcon />} />
                           </Grid>
                           <Grid item xs={1}></Grid>
 

@@ -1,17 +1,17 @@
 import { AnyAction } from "@reduxjs/toolkit";
-import { ICategory, ISpendingForm } from "../../components/spendings/spending-form";
+import { ITag, ISpendingForm } from "../../components/spendings/spending-form";
 import { ISpending } from "../../classes/spending";
-import { ICategoriesState } from "./categoriesReducer";
+import { ITagsState } from "./tagsReducer";
 
 export interface IState {
   spendings: ISpendingsState
-  categories: ICategoriesState
+  tags: ITagsState
 }
 
 export interface ISpendingsState {
   spendingForm: ISpendingForm;
   spendings: ISpending[];
-  categories: ICategory[];
+  tags: ITag[];
 }
 
 const initialState: ISpendingsState = {
@@ -19,19 +19,19 @@ const initialState: ISpendingsState = {
     id: 0,
     cost: 0,
     comment: '', 
-    category: { id: 0, name: '' },
+    tag: { id: 0, name: '' },
     isUpdate: false,
   },
   spendings: [],
-  categories: [],
+  tags: [],
 }
 
 export const spendingsReducer = (state = initialState, action: AnyAction): any => {
   switch (action.type) {
-    case 'FETCH_CATEGORIES':
+    case 'FETCH_TAGS':
       return {
         ...state,
-        categories: action.payload,
+        tags: action.payload,
       }
     case 'FETCH_SPENDINGS':
       return {
@@ -56,7 +56,7 @@ export const spendingsReducer = (state = initialState, action: AnyAction): any =
             ...spending, 
             cost: action.payload.cost,
             comment: action.payload.comment,
-            category: action.payload.category,
+            tag: action.payload.tag,
           } : spending
         ),
         spendingForm: {
@@ -81,10 +81,10 @@ export const spendingsReducer = (state = initialState, action: AnyAction): any =
         ...state,
         spendingForm: {...state.spendingForm, cost: action.payload }
       }
-    case 'FORM_CATEGORY_CHANGE':
+    case 'FORM_TAG_CHANGE':
       return {
         ...state,
-        spendingForm: {...state.spendingForm, category: state.categories.filter(category => action.payload === category.id)[0] }
+        spendingForm: {...state.spendingForm, tag: state.tags.filter(tag => action.payload === tag.id)[0] }
       }
     case 'DELETE_SPENDING':
       return {

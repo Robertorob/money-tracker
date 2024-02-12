@@ -1,23 +1,22 @@
 import { useSelector } from "react-redux";
-import CategoryForm from "./category-form";
-import CategoriesList from "./categories-list";
-import { SelectChangeEvent } from "@mui/material";
-import { createCategoryAsync, deleteCategoryAsync, updateCategoryAsync } from "../../redux/actionCreators";
+import TagForm from "./tag-form";
+import TagsList from "./tags-list";
+import { createTagAsync, deleteTagAsync, updateTagAsync } from "../../redux/actionCreators";
 import { useAppDispatch } from "../../redux/store";
 import { useEffect } from "react";
 import { IState } from "../../redux/reducers/spendingsReducer";
 
-export default function Categories() {
-  const categoryForm = useSelector((state: IState) => state.categories.categoryForm);
-  const categories = useSelector((state: IState) => state.categories.categories);
+export default function Tags() {
+  const tagForm = useSelector((state: IState) => state.tags.tagForm);
+  const tags = useSelector((state: IState) => state.tags.tags);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_URL}/categories/list`)
+    fetch(`${process.env.REACT_APP_SERVER_URL}/tags/list`)
       .then((response) => response.json())
       .then((data) => {
-        dispatch({ type: 'FETCH_CATEGORIES', payload: data.categories })
+        dispatch({ type: 'FETCH_TAGS', payload: data.tags })
       })
       .catch((err) => {
         console.log(err.message);
@@ -27,48 +26,48 @@ export default function Categories() {
 
   const handleNameChange = (event: any) => {
     dispatch({
-      type: 'CATEGORY_FORM_NAME_CHANGE',
+      type: 'TAG_FORM_NAME_CHANGE',
       payload: event.target.value as string,
     })
   };
 
   const handleCreateButtonClick = () => {
-    dispatch(createCategoryAsync(categoryForm))
+    dispatch(createTagAsync(tagForm))
   }
 
   const handleUpdateButtonClick = () => {
-    dispatch(updateCategoryAsync(categoryForm))
+    dispatch(updateTagAsync(tagForm))
   }
 
   const deleteHandler = (id: number) => {
-    dispatch(deleteCategoryAsync(id))
+    dispatch(deleteTagAsync(id))
   }
   
   const updateHandler = (id: number) => {
     dispatch({
-      type: 'SEND_CATEGORY_TO_FORM',
+      type: 'SEND_TAG_TO_FORM',
       payload: id,
     });
   }
   
   const expandHandler = (id: number) => {
     dispatch({
-      type: 'EXPAND_CATEGORY',
+      type: 'EXPAND_TAG',
       payload: id
     })
   };
 
   return (
     <>
-      <CategoryForm 
-        categories={categories}
-        form={categoryForm}
+      <TagForm 
+        tags={tags}
+        form={tagForm}
         onNameChange={handleNameChange}
         onUpdateButtonClick={handleUpdateButtonClick}
         onCreateButtonClick={handleCreateButtonClick}
       />
-      <CategoriesList
-        categories={categories}
+      <TagsList
+        tags={tags}
         deleteHandler={deleteHandler}
         updateHandler={updateHandler}
         expandHandler={expandHandler}

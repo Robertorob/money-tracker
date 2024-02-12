@@ -1,10 +1,10 @@
-import { ICategory } from "./category";
+import { ITag } from "./tag";
 
 export interface ISpending {
   id: number;
   cost: number;
   comment: string;
-  category: ICategory;
+  tag: ITag;
   expanded: boolean | null | undefined;
 }
 
@@ -12,5 +12,5 @@ export interface IUpdateSpending {
   id: number;
   cost: number;
   comment: string;
-  categoryId?: number | null;
+  tagId?: number | null;
 }

@@ -1,13 +1,13 @@
-import { IUpdateCategory } from "../classes/category";
+import { IUpdateTag } from "../classes/tag";
 import { ISpending, IUpdateSpending } from "../classes/spending";
-import { ICategoryForm } from "../components/categories/category-form";
+import { ITagForm } from "../components/tags/tag-form";
 import { ISpendingForm } from "../components/spendings/spending-form";
 
 export function createSpendingAsync(spending: ISpendingForm) {
   return async (dispatch: any, getState: any, { api }: any): Promise<any> => {
     const createSpending = {
       ...spending,
-      categoryId: spending.category?.id === 0 ? null : spending.category?.id,
+      tagId: spending.tag?.id === 0 ? null : spending.tag?.id,
     }
 
     await fetch(`${process.env.REACT_APP_SERVER_URL}/spendings/create`, {
@@ -35,7 +35,7 @@ export function updateSpendingAsync(spending: ISpendingForm) {
   return async (dispatch: any, getState: any, { api }: any): Promise<any> => {
     const updateSpending: IUpdateSpending = {
       ...spending,
-      categoryId: spending.category?.id,
+      tagId: spending.tag?.id,
     }
 
     await fetch(`${process.env.REACT_APP_SERVER_URL}/spendings/update`, {
@@ -77,15 +77,15 @@ export function deleteSpendingAsync(id: number) {
   }
 }
 
-export function createCategoryAsync(category: ICategoryForm) {
+export function createTagAsync(tag: ITagForm) {
   return async (dispatch: any, getState: any, { api }: any): Promise<any> => {
-    const createCategory = {
-      ...category,
+    const createTag = {
+      ...tag,
     }
 
-    await fetch(`${process.env.REACT_APP_SERVER_URL}/categories/create`, {
+    await fetch(`${process.env.REACT_APP_SERVER_URL}/tags/create`, {
       method: 'POST',
-      body: JSON.stringify(createCategory),
+      body: JSON.stringify(createTag),
       headers: {
          'Content-type': 'application/json; charset=UTF-8',
       },
@@ -93,7 +93,7 @@ export function createCategoryAsync(category: ICategoryForm) {
     .then((response) => response.json())
     .then((data) => {
       dispatch({
-        type: 'CREATE_CATEGORY',
+        type: 'CREATE_TAG',
         payload: data
       })
     })
@@ -104,23 +104,23 @@ export function createCategoryAsync(category: ICategoryForm) {
   }
 }
 
-export function updateCategoryAsync(category: ICategoryForm) {
+export function updateTagAsync(tag: ITagForm) {
   return async (dispatch: any, getState: any, { api }: any): Promise<any> => {
-    const updateCategory: IUpdateCategory = {
-      ...category,
+    const updateTag: IUpdateTag = {
+      ...tag,
     }
 
-    await fetch(`${process.env.REACT_APP_SERVER_URL}/categories/update`, {
+    await fetch(`${process.env.REACT_APP_SERVER_URL}/tags/update`, {
       method: 'POST',
-      body: JSON.stringify(updateCategory),
+      body: JSON.stringify(updateTag),
       headers: {
          'Content-type': 'application/json; charset=UTF-8',
       },
     })
     .then(() => {
       dispatch({
-        type: 'UPDATE_CATEGORY',
-        payload: category
+        type: 'UPDATE_TAG',
+        payload: tag
       })
     })
     .catch((err) => {
@@ -129,9 +129,9 @@ export function updateCategoryAsync(category: ICategoryForm) {
   }
 }
 
-export function deleteCategoryAsync(id: number) {
+export function deleteTagAsync(id: number) {
   return async (dispatch: any, getState: any, { api }: any): Promise<any> => {
-    await fetch(`${process.env.REACT_APP_SERVER_URL}/categories/delete/${id}`, {
+    await fetch(`${process.env.REACT_APP_SERVER_URL}/tags/delete/${id}`, {
       method: 'POST',
       headers: {
          'Content-type': 'application/json; charset=UTF-8',
@@ -139,7 +139,7 @@ export function deleteCategoryAsync(id: number) {
     })
     .then(() => {
       dispatch({
-        type: 'DELETE_CATEGORY',
+        type: 'DELETE_TAG',
         payload: id,
       });
     })

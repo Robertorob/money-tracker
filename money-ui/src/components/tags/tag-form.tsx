@@ -1,22 +1,22 @@
-import { ICategory } from "../spendings/spending-form";
+import { ITag } from "../spendings/spending-form";
 import CommonForm from "../common/common-form";
 
-export interface ICategoryFormProps {
+export interface ITagFormProps {
   children?: any;
-  categories: ICategory[];
-  form: ICategoryForm;
+  tags: ITag[];
+  form: ITagForm;
   onNameChange: any;
   onUpdateButtonClick: any;
   onCreateButtonClick: any;
 }
 
-export interface ICategoryForm {
+export interface ITagForm {
   id: number;
   name: string;
   isUpdate: boolean,
 }
 
-export default function CategoryForm(props: ICategoryFormProps) {
+export default function TagForm(props: ITagFormProps) {
   return (
     <>
       <CommonForm

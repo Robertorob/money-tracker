@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import SpendingForm, { ICategory, ISpendingForm, ISpendingFormProps } from '../components/spendings/spending-form';
+import SpendingForm, { ITag, ISpendingForm, ISpendingFormProps } from '../components/spendings/spending-form';
 
 const meta: Meta<typeof SpendingForm> = {
   title: 'Spendings/SpendingForm',
@@ -14,13 +14,13 @@ const meta: Meta<typeof SpendingForm> = {
 export default meta;
 type Story = StoryObj<typeof SpendingForm>;
 
-const initialCategory: ICategory = {
+const initialTag: ITag = {
   id: 0,
   name: "Food"
 }
 
-const categories: ICategory[] = [
-  initialCategory,
+const tags: ITag[] = [
+  initialTag,
   {
     id: 1,
     name: 'Sport'
@@ -31,16 +31,16 @@ const spendingForm: ISpendingForm = {
   id: 0,
   cost: 0,
   comment: '',
-  category: initialCategory,
+  tag: initialTag,
   isUpdate: false,
 }
 
 const spendingFormProps: ISpendingFormProps = {
-  categories: categories,
+  tags: tags,
   form: spendingForm,
   onCostChange: undefined,
   onCommentChange: undefined,
-  onCategoryChange: undefined,
+  onTagChange: undefined,
   onUpdateButtonClick: undefined,
   onCreateButtonClick: undefined
 }

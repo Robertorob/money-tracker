@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import SpendingForm, { ICategory } from "./spending-form";
+import SpendingForm, { ITag } from "./spending-form";
 import SpendingsList from "./spendings-list";
 import { SelectChangeEvent } from "@mui/material";
 import { createSpendingAsync, deleteSpendingAsync, updateSpendingAsync } from "../../redux/actionCreators";
@@ -9,16 +9,16 @@ import { IState } from "../../redux/reducers/spendingsReducer";
 
 export default function Spendings() {
   const spendingForm = useSelector((state: IState) => state.spendings.spendingForm);
-  const categories = useSelector((state: IState) => state.spendings.categories);
+  const tags = useSelector((state: IState) => state.spendings.tags);
   const spendings = useSelector((state: IState) => state.spendings.spendings);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_URL}/categories/list`)
+    fetch(`${process.env.REACT_APP_SERVER_URL}/tags/list`)
       .then((response) => response.json())
       .then((data) => {
-        dispatch({ type: 'FETCH_CATEGORIES', payload: data.categories })
+        dispatch({ type: 'FETCH_TAGS', payload: data.tags })
       })
       .catch((err) => {
         console.log(err.message);
@@ -36,9 +36,9 @@ export default function Spendings() {
       });
   }, []);
 
-  const handleCategoryChange = (event: SelectChangeEvent) => {
+  const handleTagChange = (event: SelectChangeEvent) => {
     dispatch({
-      type: 'FORM_CATEGORY_CHANGE',
+      type: 'FORM_TAG_CHANGE',
       payload: event.target.value,
     })
   };
@@ -86,11 +86,11 @@ export default function Spendings() {
   return (
     <>
       <SpendingForm
-        categories={categories}
+        tags={tags}
         form={spendingForm}
         onCostChange={handleCostChange}
         onCommentChange={handleCommentChange}
-        onCategoryChange={handleCategoryChange}
+        onTagChange={handleTagChange}
         onUpdateButtonClick={handleUpdateButtonClick}
         onCreateButtonClick={handleCreateButtonClick}
       />

@@ -2,11 +2,11 @@ import CommonForm from "../common/common-form";
 
 export interface ISpendingFormProps {
   children?: any;
-  categories: ICategory[];
+  tags: ITag[];
   form: ISpendingForm;
   onCostChange: any;
   onCommentChange: any;
-  onCategoryChange: any;
+  onTagChange: any;
   onUpdateButtonClick: any;
   onCreateButtonClick: any;
 }
@@ -15,11 +15,11 @@ export interface ISpendingForm {
   id: number;
   cost: number;
   comment: string;
-  category: ICategory;
+  tag: ITag;
   isUpdate: boolean,
 }
 
-export interface ICategory {
+export interface ITag {
   id: number | null | undefined;
   name: string;
 }
@@ -41,14 +41,14 @@ export default function SpendingForm(props: ISpendingFormProps) {
           onChange: props.onCommentChange,
         },
         {
-          value: props.form.category?.id?.toString() ?? 0,
+          value: props.form.tag?.id?.toString() ?? 0,
           type: 'select',
-          label: 'Category',
-          onChange: props.onCategoryChange,
-          selectOptions: props.categories.map((category: ICategory) => {
+          label: 'Tag',
+          onChange: props.onTagChange,
+          selectOptions: props.tags.map((tag: ITag) => {
             return {
-              value: category?.id,
-              label: category?.name,
+              value: tag?.id,
+              label: tag?.name,
             }
           }),
         },
