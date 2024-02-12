@@ -1,7 +1,7 @@
 ﻿using Humanizer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Money.BusinessLogic.Dto.Category;
+using Money.BusinessLogic.Dto.Tag;
 using Money.BusinessLogic.Dto.Spending;
 using Money.BusinessLogic.Exceptions;
 using Money.BusinessLogic.Interfaces;
@@ -29,13 +29,13 @@ public class SpendingsService : ISpendingsService
   {
     _logger.LogInformation("Creating new spending.");
 
-    var category = await _context.Categories.FindAsync(dto.CategoryId);
+    var tag = await _context.Tags.FindAsync(dto.TagId);
 
     var entity = new DataAccess.Entities.Spending
     {
       Cost = dto.Cost,
       Comment = dto.Comment,
-      CategoryId = dto.CategoryId,
+      TagId = dto.TagId,
     };
 
     await _context.Spendings.AddAsync(entity);
@@ -44,10 +44,10 @@ public class SpendingsService : ISpendingsService
     return new()
     {
       Id = entity.Id,
-      Category = dto.CategoryId is null ? null : new()
+      Tag = dto.TagId is null ? null : new()
       {
-        Id = category.Id,
-        Name = category.Name,
+        Id = tag.Id,
+        Name = tag.Name,
       },
       Comment = entity.Comment,
       Cost = entity.Cost,
@@ -60,7 +60,7 @@ public class SpendingsService : ISpendingsService
 
     var entities = await _context.Spendings
       .OrderByDescending(spending =>  spending.Id)
-      .Include(spending => spending.Category)
+      .Include(spending => spending.Tag)
       .Take(10)
       .AsNoTracking()
       .ToListAsync();
@@ -72,11 +72,11 @@ public class SpendingsService : ISpendingsService
         Id = entity.Id,
         Cost = entity.Cost,
         Comment = entity.Comment,
-        Category = entity.CategoryId is null ? null :
+        Tag = entity.TagId is null ? null :
         new()
         {
-          Id = entity.CategoryId.Value,
-          Name = entity.Category.Name
+          Id = entity.TagId.Value,
+          Name = entity.Tag.Name
         }
       }).ToList(),
     };
@@ -96,7 +96,7 @@ public class SpendingsService : ISpendingsService
 
     entity.Cost = updateSpending.Cost;
     entity.Comment = updateSpending.Comment;
-    entity.CategoryId = updateSpending.CategoryId;
+    entity.TagId = updateSpending.TagId;
 
     await _context.SaveChangesAsync();
   }

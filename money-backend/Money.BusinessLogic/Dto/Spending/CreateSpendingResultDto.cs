@@ -1,4 +1,4 @@
-﻿using Money.BusinessLogic.Dto.Category;
+﻿using Money.BusinessLogic.Dto.Tag;
 
 namespace Money.BusinessLogic.Dto.Spending;
 
@@ -10,5 +10,5 @@ public class CreateSpendingResultDto
 
     public string Comment { get; set; }
 
-    public CategoryDto? Category { get; set; }
+    public TagDto? Tag { get; set; }
 }

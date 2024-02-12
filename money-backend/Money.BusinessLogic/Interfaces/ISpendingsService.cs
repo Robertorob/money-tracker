@@ -1,4 +1,4 @@
-﻿using Money.BusinessLogic.Dto.Category;
+﻿using Money.BusinessLogic.Dto.Tag;
 using Money.BusinessLogic.Dto.Spending;
 
 namespace Money.BusinessLogic.Interfaces;

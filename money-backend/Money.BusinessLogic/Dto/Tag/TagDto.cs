@@ -1,6 +1,6 @@
 ﻿namespace Money.BusinessLogic.Dto.Category;
 
-public class GetCategoryDto
+public class TagDto
 {
     public long Id { get; set; }
 

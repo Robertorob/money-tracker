@@ -1,5 +1,5 @@
 ﻿namespace Money.DataAccess.Entities;
-public class Category
+public class Tag
 {
   public long Id { get; set; }
 

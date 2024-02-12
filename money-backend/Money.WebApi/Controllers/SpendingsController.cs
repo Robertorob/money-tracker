@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Money.BusinessLogic.Dto.Category;
+using Money.BusinessLogic.Dto.Tag;
 using Money.BusinessLogic.Dto.Spending;
 using Money.BusinessLogic.Interfaces;
 

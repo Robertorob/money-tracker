@@ -8,5 +8,5 @@ public class UpdateSpendingDto
 
     public string Comment { get; set; }
 
-    public long? CategoryId { get; set; }
+    public long? TagId { get; set; }
 }

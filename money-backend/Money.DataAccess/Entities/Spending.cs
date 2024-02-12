@@ -7,7 +7,7 @@ public class Spending
 
   public string Comment { get; set; }
 
-  public long? CategoryId { get; set; }
+  public long? TagId { get; set; }
 
-  public Category Category { get; set; }
+  public Tag Tag { get; set; }
 }

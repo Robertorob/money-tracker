@@ -22,7 +22,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services
   .AddTransient<ISpendingsService, SpendingsService>()
-  .AddTransient<ICategoriesService, CategoriesService>();
+  .AddTransient<ITagsService, TagsService>();
 
 builder.Services.AddCors(options =>
 {
