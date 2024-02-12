@@ -1,4 +1,4 @@
-﻿namespace Money.BusinessLogic.Dto.Category;
+﻿namespace Money.BusinessLogic.Dto.Tag;
 
 public class CreateTagDto
 {

@@ -1,6 +1,6 @@
-﻿namespace Money.BusinessLogic.Dto.Category;
+﻿namespace Money.BusinessLogic.Dto.Tag;
 
 public class GetTagsDto
 {
-    public List<GetTagDto> Categories { get; set; }
+    public List<GetTagDto> Tags { get; set; }
 }
