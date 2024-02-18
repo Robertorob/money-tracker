@@ -5,5 +5,5 @@ public class Tag
 
   public string Name { get; set; }
 
-  public IEnumerable<Spending>? Spendings { get; set; }
+  public ICollection<Spending>? Spendings { get; set; }
 }

@@ -29,11 +29,17 @@ public class SpendingsService : ISpendingsService
   {
     _logger.LogInformation("Creating new spending.");
 
+    IQueryable<Tag>? tags = null;
+    if (dto.TagIds is not null && dto.TagIds.Any())
+    {
+      tags = _context.Tags.Where(tag => dto.TagIds.Contains(tag.Id));
+    }
+
     var entity = new Spending
     {
       Cost = dto.Cost,
       Comment = dto.Comment,
-      Tags = dto.TagIds?.Select(tagId => new Tag { Id = tagId }),
+      Tags = tags?.ToList(),
     };
 
     await _context.Spendings.AddAsync(entity);
@@ -85,7 +91,7 @@ public class SpendingsService : ISpendingsService
 
     entity.Cost = updateSpending.Cost;
     entity.Comment = updateSpending.Comment;
-    entity.Tags = updateSpending.TagIds?.Select(tagId => new Tag { Id = tagId });
+    entity.Tags = updateSpending.TagIds?.Select(tagId => new Tag { Id = tagId }).ToList();
 
     await _context.SaveChangesAsync();
   }

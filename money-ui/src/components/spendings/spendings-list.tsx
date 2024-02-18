@@ -21,14 +21,14 @@ export default function SpendingsList(props: ISpendingsListProps) {
                 },
                 {
                   label: 'Comment',
-                  width: 4,
+                  width: 7,
                   fieldNames: ['comment'],
                 },
-                {
-                  label: 'Tag',
-                  width: 3,
-                  fieldNames: ['tag', 'name'],
-                },
+                // {
+                //   label: 'Tags',
+                //   width: 3,
+                //   fieldNames: ['tags', 'name'],
+                // },
               ]}
               deleteHandler={props.deleteHandler}
               updateHandler={props.updateHandler}

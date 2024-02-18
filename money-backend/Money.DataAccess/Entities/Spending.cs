@@ -7,5 +7,5 @@ public class Spending
 
   public string Comment { get; set; } = string.Empty;
 
-  public IEnumerable<Tag>? Tags { get; set; }
+  public ICollection<Tag>? Tags { get; set; }
 }

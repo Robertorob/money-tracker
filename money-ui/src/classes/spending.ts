@@ -4,7 +4,7 @@ export interface ISpendingItem {
   id: number;
   cost: number;
   comment: string;
-  tag: ITagItem;
+  tags: ITagItem[];
   expanded: boolean | null | undefined;
 }
 
