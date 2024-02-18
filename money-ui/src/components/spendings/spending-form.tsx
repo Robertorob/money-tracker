@@ -36,7 +36,7 @@ export default function SpendingForm(props: ISpendingFormProps) {
         },
         {
           value: props.form.comment,
-          type: 'string',
+          type: 'text',
           label: 'Comment',
           onChange: props.onCommentChange,
         },

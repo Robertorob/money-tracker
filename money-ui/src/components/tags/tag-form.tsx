@@ -23,7 +23,7 @@ export default function TagForm(props: ITagFormProps) {
         fields={[
           {
             value: props.form.name,
-            type: 'string',
+            type: 'text',
             label: 'Name',
             onChange: props.onNameChange,
           },

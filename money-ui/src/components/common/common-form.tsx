@@ -2,7 +2,7 @@ import { Button, FormControl, FormGroup, InputLabel, MenuItem, Select, TextField
 
 export interface IField {
   value: any;
-  type: string;
+  type: 'number' | 'text' | 'select' | 'multiselect';
   label: string;
   onChange: any;
   selectOptions?: ISelectOption[];
@@ -35,27 +35,33 @@ export default function CommonForm(props: ICommonFormProps) {
   return (
     <FormGroup sx={formGroupSx}>
       {
-        props.fields.map((field: IField)=> (
-          !field.selectOptions &&
-            <FormControl fullWidth sx={formControlSx}>
-              <TextField value={field.value} label={field.label} onChange={field.onChange} type={field.type} variant="outlined"/>
-            </FormControl>
-          ||
-            <FormControl fullWidth sx={formControlSx}>
-              <InputLabel>{field.label}</InputLabel>
-              <Select
-                value={field.value}
-                label={field.label}
-                onChange={field.onChange}
-              >
-                {
-                  field.selectOptions!.map((option: ISelectOption)=> (
-                    <MenuItem value={option.value}>{option.label}</MenuItem>
-                  ))
-                }
-              </Select>
-            </FormControl>
-        ))
+        props.fields.map((field: IField) =>
+        {
+          if (field.type === 'select')
+            return (
+              <FormControl fullWidth sx={formControlSx}>
+                <InputLabel>{field.label}</InputLabel>
+                <Select
+                  value={field.value}
+                  label={field.label}
+                  onChange={field.onChange}
+                >
+                  {
+                    field.selectOptions!.map((option: ISelectOption)=> (
+                      <MenuItem value={option.value}>{option.label}</MenuItem>
+                    ))
+                  }
+                </Select>
+              </FormControl>
+            );
+
+          if (field.type === 'number' || field.type === 'text')
+            return (
+              <FormControl fullWidth sx={formControlSx}>
+                <TextField value={field.value} label={field.label} onChange={field.onChange} type={field.type} variant="outlined"/>
+              </FormControl>
+            );
+        })
       }
       {
         props.isUpdate ?
