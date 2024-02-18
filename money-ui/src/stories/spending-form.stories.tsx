@@ -41,7 +41,6 @@ const spendingFormProps: ISpendingFormProps = {
   form: spendingForm,
   onCostChange: undefined,
   onCommentChange: undefined,
-  onTagChange: undefined,
   onUpdateButtonClick: undefined,
   onCreateButtonClick: undefined,
   onMultiTagChange: undefined,

@@ -83,11 +83,6 @@ export const spendingsReducer = (state = initialState, action: AnyAction): any =
         ...state,
         spendingForm: {...state.spendingForm, cost: action.payload }
       }
-    case 'FORM_TAG_CHANGE':
-      return {
-        ...state,
-        spendingForm: {...state.spendingForm, tag: state.tags.filter(tag => action.payload === tag.id)[0] }
-      }
     case 'FORM_MULTI_TAG_CHANGE':
       const selectedIds = action.payload.map((selectedValue: ISelectOption) => (selectedValue.value));
       return {

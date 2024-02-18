@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import SpendingForm, { ITag } from "./spending-form";
 import SpendingsList from "./spendings-list";
-import { SelectChangeEvent } from "@mui/material";
 import { createSpendingAsync, deleteSpendingAsync, updateSpendingAsync } from "../../redux/actionCreators";
 import { useAppDispatch } from "../../redux/store";
 import { useEffect } from "react";
@@ -37,13 +36,6 @@ export default function Spendings() {
       });
   }, []);
 
-  const handleTagChange = (event: SelectChangeEvent) => {
-    dispatch({
-      type: 'FORM_TAG_CHANGE',
-      payload: event.target.value,
-    })
-  };
-  
   const handleMultiTagChange = (selectedValues: ISelectOption[]) => {
     dispatch({
       type: 'FORM_MULTI_TAG_CHANGE',
@@ -98,10 +90,9 @@ export default function Spendings() {
         form={spendingForm}
         onCostChange={handleCostChange}
         onCommentChange={handleCommentChange}
-        onTagChange={handleTagChange}
+        onMultiTagChange={handleMultiTagChange}
         onUpdateButtonClick={handleUpdateButtonClick}
         onCreateButtonClick={handleCreateButtonClick}
-        onMultiTagChange={handleMultiTagChange}
       />
       <SpendingsList
         spendings={spendings}

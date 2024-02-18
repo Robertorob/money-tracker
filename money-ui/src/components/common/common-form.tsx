@@ -3,7 +3,7 @@ import ReactSelect from 'react-select' ;
 
 export interface IField {
   value: any;
-  type: 'number' | 'text' | 'select' | 'multiselect';
+  type: 'number' | 'text' | 'select' | 'multiselect' | 'mui-select';
   label: string;
   onChange: any;
   selectOptions?: ISelectOption[];
@@ -45,7 +45,7 @@ export default function CommonForm(props: ICommonFormProps) {
               </FormControl>
             );
 
-          if (field.type === 'select')
+          if (field.type === 'mui-select')
             return (
               <FormControl fullWidth sx={formControlSx}>
                 <InputLabel>{field.label}</InputLabel>
@@ -63,11 +63,23 @@ export default function CommonForm(props: ICommonFormProps) {
               </FormControl>
             );
           
+          if (field.type === 'select')
+            return (
+              <FormControl fullWidth sx={formControlSx}>
+                <ReactSelect
+                  placeholder={field.label}
+                  options={field.selectOptions ?? []}
+                  className="basic-single"
+                  onChange={field.onChange}
+                />
+              </FormControl>
+            );
+          
           if (field.type === 'multiselect')
             return (
               <FormControl fullWidth sx={formControlSx}>
-                <InputLabel>{field.label}</InputLabel>
                 <ReactSelect
+                  placeholder={field.label}
                   isMulti
                   options={field.selectOptions ?? []}
                   className="basic-multi-select"
