@@ -33,16 +33,18 @@ const spendingForm: ISpendingForm = {
   comment: '',
   tag: initialTag,
   isUpdate: false,
+  tags: [initialTag],
 }
 
 const spendingFormProps: ISpendingFormProps = {
-  tags: tags,
+  availableTags: tags,
   form: spendingForm,
   onCostChange: undefined,
   onCommentChange: undefined,
   onTagChange: undefined,
   onUpdateButtonClick: undefined,
-  onCreateButtonClick: undefined
+  onCreateButtonClick: undefined,
+  onMultiTagChange: undefined,
 }
 
 export const AddSpending: Story = {

@@ -2,11 +2,12 @@ import CommonForm from "../common/common-form";
 
 export interface ISpendingFormProps {
   children?: any;
-  tags: ITag[];
+  availableTags: ITag[];
   form: ISpendingForm;
   onCostChange: any;
   onCommentChange: any;
   onTagChange: any;
+  onMultiTagChange: any;
   onUpdateButtonClick: any;
   onCreateButtonClick: any;
 }
@@ -16,6 +17,7 @@ export interface ISpendingForm {
   cost: number;
   comment: string;
   tag: ITag;
+  tags: ITag[];
   isUpdate: boolean,
 }
 
@@ -45,7 +47,7 @@ export default function SpendingForm(props: ISpendingFormProps) {
           type: 'select',
           label: 'Tag',
           onChange: props.onTagChange,
-          selectOptions: props.tags.map((tag: ITag) => {
+          selectOptions: props.availableTags.map((tag: ITag) => {
             return {
               value: tag?.id,
               label: tag?.name,
@@ -56,8 +58,8 @@ export default function SpendingForm(props: ISpendingFormProps) {
           value: props.form.tag?.id?.toString() ? [props.form.tag?.id?.toString()] : [],
           type: 'multiselect',
           label: 'Tag',
-          onChange: props.onTagChange,
-          selectOptions: props.tags.map((tag: ITag) => {
+          onChange: props.onMultiTagChange,
+          selectOptions: props.availableTags.map((tag: ITag) => {
             return {
               value: tag?.id,
               label: tag?.name,

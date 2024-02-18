@@ -2,6 +2,7 @@ import { AnyAction } from "@reduxjs/toolkit";
 import { ITag, ISpendingForm } from "../../components/spendings/spending-form";
 import { ISpending } from "../../classes/spending";
 import { ITagsState } from "./tagsReducer";
+import { ISelectOption } from "../../components/common/common-form";
 
 export interface IState {
   spendings: ISpendingsState
@@ -21,6 +22,7 @@ const initialState: ISpendingsState = {
     comment: '', 
     tag: { id: 0, name: '' },
     isUpdate: false,
+    tags: [],
   },
   spendings: [],
   tags: [],
@@ -85,6 +87,12 @@ export const spendingsReducer = (state = initialState, action: AnyAction): any =
       return {
         ...state,
         spendingForm: {...state.spendingForm, tag: state.tags.filter(tag => action.payload === tag.id)[0] }
+      }
+    case 'FORM_MULTI_TAG_CHANGE':
+      const selectedIds = action.payload.map((selectedValue: ISelectOption) => (selectedValue.value));
+      return {
+        ...state,
+        spendingForm: {...state.spendingForm, tags: state.tags.filter(tag => selectedIds.includes(tag.id)) }
       }
     case 'DELETE_SPENDING':
       return {

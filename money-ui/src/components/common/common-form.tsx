@@ -1,4 +1,5 @@
 import { Button, FormControl, FormGroup, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import ReactSelect from 'react-select' ;
 
 export interface IField {
   value: any;
@@ -66,18 +67,12 @@ export default function CommonForm(props: ICommonFormProps) {
             return (
               <FormControl fullWidth sx={formControlSx}>
                 <InputLabel>{field.label}</InputLabel>
-                <Select
-                  value={field.value}
-                  label={field.label}
+                <ReactSelect
+                  isMulti
+                  options={field.selectOptions ?? []}
+                  className="basic-multi-select"
                   onChange={field.onChange}
-                  multiple
-                >
-                  {
-                    field.selectOptions!.map((option: ISelectOption)=> (
-                      <MenuItem value={option.value}>{option.label}</MenuItem>
-                    ))
-                  }
-                </Select>
+                />
               </FormControl>
             );
         })
