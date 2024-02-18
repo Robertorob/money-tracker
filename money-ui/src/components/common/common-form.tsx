@@ -37,6 +37,13 @@ export default function CommonForm(props: ICommonFormProps) {
       {
         props.fields.map((field: IField) =>
         {
+          if (field.type === 'number' || field.type === 'text')
+            return (
+              <FormControl fullWidth sx={formControlSx}>
+                <TextField value={field.value} label={field.label} onChange={field.onChange} type={field.type} variant="outlined"/>
+              </FormControl>
+            );
+
           if (field.type === 'select')
             return (
               <FormControl fullWidth sx={formControlSx}>
@@ -54,11 +61,23 @@ export default function CommonForm(props: ICommonFormProps) {
                 </Select>
               </FormControl>
             );
-
-          if (field.type === 'number' || field.type === 'text')
+          
+          if (field.type === 'multiselect')
             return (
               <FormControl fullWidth sx={formControlSx}>
-                <TextField value={field.value} label={field.label} onChange={field.onChange} type={field.type} variant="outlined"/>
+                <InputLabel>{field.label}</InputLabel>
+                <Select
+                  value={field.value}
+                  label={field.label}
+                  onChange={field.onChange}
+                  multiple
+                >
+                  {
+                    field.selectOptions!.map((option: ISelectOption)=> (
+                      <MenuItem value={option.value}>{option.label}</MenuItem>
+                    ))
+                  }
+                </Select>
               </FormControl>
             );
         })

@@ -52,6 +52,18 @@ export default function SpendingForm(props: ISpendingFormProps) {
             }
           }),
         },
+        {
+          value: props.form.tag?.id?.toString() ? [props.form.tag?.id?.toString()] : [],
+          type: 'multiselect',
+          label: 'Tag',
+          onChange: props.onTagChange,
+          selectOptions: props.tags.map((tag: ITag) => {
+            return {
+              value: tag?.id,
+              label: tag?.name,
+            }
+          }),
+        },
       ]}
       isUpdate={props.form.isUpdate}
       onUpdateButtonClick={props.onUpdateButtonClick}
