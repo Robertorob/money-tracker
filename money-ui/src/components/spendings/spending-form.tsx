@@ -15,13 +15,12 @@ export interface ISpendingForm {
   id: number;
   cost: number;
   comment: string;
-  tag: ITag;
   tags: ITag[];
   isUpdate: boolean,
 }
 
 export interface ITag {
-  id: number | null | undefined;
+  id: number;
   name: string;
 }
 
@@ -42,7 +41,7 @@ export default function SpendingForm(props: ISpendingFormProps) {
           onChange: props.onCommentChange,
         },
         {
-          value: props.form.tag?.id?.toString() ? [props.form.tag?.id?.toString()] : [],
+          value: props.form.tags ? props.form.tags.map((tag: ITag) => tag.id) : [],
           type: 'multiselect',
           label: 'Tags',
           onChange: props.onTagsChange,

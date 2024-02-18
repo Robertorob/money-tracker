@@ -5,9 +5,7 @@ public class Spending
 
   public double Cost { get; set; }
 
-  public string Comment { get; set; }
+  public string Comment { get; set; } = string.Empty;
 
-  public long? TagId { get; set; }
-
-  public Tag Tag { get; set; }
+  public IEnumerable<Tag>? Tags { get; set; }
 }

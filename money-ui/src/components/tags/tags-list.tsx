@@ -3,11 +3,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ModeIcon from '@mui/icons-material/Mode';
 import '../tab/tab-panel.css';
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { ITag } from "../../classes/tag";
+import { ITagItem } from "../../classes/tag";
 import CommonList from "../common/common-list";
 
 export interface ITagsListProps {
-  tags: ITag[];
+  tags: ITagItem[];
   deleteHandler: (id: number) => void
   updateHandler: (id: number) => void
   expandHandler: (id: number) => void

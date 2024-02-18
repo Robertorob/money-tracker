@@ -10,5 +10,5 @@ public class CreateSpendingResultDto
 
     public string Comment { get; set; }
 
-    public TagDto? Tag { get; set; }
+    public IEnumerable<TagDto>? Tags { get; set; }
 }

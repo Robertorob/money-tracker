@@ -1,6 +1,6 @@
 import { AnyAction } from "@reduxjs/toolkit";
 import { ITag, ISpendingForm } from "../../components/spendings/spending-form";
-import { ISpending } from "../../classes/spending";
+import { ISpendingItem } from "../../classes/spending";
 import { ITagsState } from "./tagsReducer";
 import { ISelectOption } from "../../components/common/common-form";
 
@@ -11,7 +11,7 @@ export interface IState {
 
 export interface ISpendingsState {
   spendingForm: ISpendingForm;
-  spendings: ISpending[];
+  spendings: ISpendingItem[];
   tags: ITag[];
 }
 
@@ -20,7 +20,6 @@ const initialState: ISpendingsState = {
     id: 0,
     cost: 0,
     comment: '', 
-    tag: { id: 0, name: '' },
     isUpdate: false,
     tags: [],
   },

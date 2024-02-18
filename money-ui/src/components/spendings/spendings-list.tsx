@@ -1,9 +1,9 @@
 import '../tab/tab-panel.css';
-import { ISpending } from "../../classes/spending";
+import { ISpendingItem } from "../../classes/spending";
 import CommonList from "../common/common-list";
 
 export interface ISpendingsListProps {
-  spendings: ISpending[];
+  spendings: ISpendingItem[];
   deleteHandler: (id: number) => void
   updateHandler: (id: number) => void
   expandHandler: (id: number) => void

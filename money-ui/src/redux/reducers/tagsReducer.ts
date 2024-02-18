@@ -1,10 +1,10 @@
 import { AnyAction } from "@reduxjs/toolkit";
 import { ITagForm } from "../../components/tags/tag-form";
-import { ITag } from "../../classes/tag";
+import { ITagItem } from "../../classes/tag";
 
 export interface ITagsState {
   tagForm: ITagForm;
-  tags: ITag[];
+  tags: ITagItem[];
 }
 
 const initialState: ITagsState = {

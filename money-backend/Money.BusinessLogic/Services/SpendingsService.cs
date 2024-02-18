@@ -29,13 +29,11 @@ public class SpendingsService : ISpendingsService
   {
     _logger.LogInformation("Creating new spending.");
 
-    var tag = await _context.Tags.FindAsync(dto.TagId);
-
-    var entity = new DataAccess.Entities.Spending
+    var entity = new Spending
     {
       Cost = dto.Cost,
       Comment = dto.Comment,
-      TagId = dto.TagId,
+      Tags = dto.TagIds?.Select(tagId => new Tag { Id = tagId }),
     };
 
     await _context.Spendings.AddAsync(entity);
@@ -44,11 +42,7 @@ public class SpendingsService : ISpendingsService
     return new()
     {
       Id = entity.Id,
-      Tag = dto.TagId is null ? null : new()
-      {
-        Id = tag.Id,
-        Name = tag.Name,
-      },
+      Tags = entity.Tags?.Select(tag => new TagDto { Id = tag.Id, Name = tag.Name }),
       Comment = entity.Comment,
       Cost = entity.Cost,
     };
@@ -59,8 +53,8 @@ public class SpendingsService : ISpendingsService
     _logger.LogInformation("Get spendings.");
 
     var entities = await _context.Spendings
-      .OrderByDescending(spending =>  spending.Id)
-      .Include(spending => spending.Tag)
+      .OrderByDescending(spending => spending.Id)
+      .Include(spending => spending.Tags)
       .Take(10)
       .AsNoTracking()
       .ToListAsync();
@@ -72,13 +66,8 @@ public class SpendingsService : ISpendingsService
         Id = entity.Id,
         Cost = entity.Cost,
         Comment = entity.Comment,
-        Tag = entity.TagId is null ? null :
-        new()
-        {
-          Id = entity.TagId.Value,
-          Name = entity.Tag.Name
-        }
-      }).ToList(),
+        Tags = entity.Tags?.Select(tag => new TagDto { Id = tag.Id, Name = tag.Name }),
+      }),
     };
   }
 
@@ -96,7 +85,7 @@ public class SpendingsService : ISpendingsService
 
     entity.Cost = updateSpending.Cost;
     entity.Comment = updateSpending.Comment;
-    entity.TagId = updateSpending.TagId;
+    entity.Tags = updateSpending.TagIds?.Select(tagId => new Tag { Id = tagId });
 
     await _context.SaveChangesAsync();
   }

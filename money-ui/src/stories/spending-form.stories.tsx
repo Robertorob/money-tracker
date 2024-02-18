@@ -31,7 +31,6 @@ const spendingForm: ISpendingForm = {
   id: 0,
   cost: 0,
   comment: '',
-  tag: initialTag,
   isUpdate: false,
   tags: [initialTag],
 }

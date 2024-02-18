@@ -1,13 +1,13 @@
 import { IUpdateTag } from "../classes/tag";
-import { ISpending, IUpdateSpending } from "../classes/spending";
+import { IUpdateSpending } from "../classes/spending";
 import { ITagForm } from "../components/tags/tag-form";
-import { ISpendingForm } from "../components/spendings/spending-form";
+import { ISpendingForm, ITag } from "../components/spendings/spending-form";
 
 export function createSpendingAsync(spending: ISpendingForm) {
   return async (dispatch: any, getState: any, { api }: any): Promise<any> => {
     const createSpending = {
       ...spending,
-      tagId: spending.tag?.id === 0 ? null : spending.tag?.id,
+      tagIds: spending.tags ? spending.tags.map((tag: ITag) => tag.id) : null,
     }
 
     await fetch(`${process.env.REACT_APP_SERVER_URL}/spendings/create`, {
@@ -27,7 +27,6 @@ export function createSpendingAsync(spending: ISpendingForm) {
     .catch((err) => {
         console.log(err.message);
     });
-
   }
 }
 
@@ -35,7 +34,7 @@ export function updateSpendingAsync(spending: ISpendingForm) {
   return async (dispatch: any, getState: any, { api }: any): Promise<any> => {
     const updateSpending: IUpdateSpending = {
       ...spending,
-      tagId: spending.tag?.id,
+      tagIds: spending.tags ? spending.tags.map((tag: ITag) => tag.id!) : null,
     }
 
     await fetch(`${process.env.REACT_APP_SERVER_URL}/spendings/update`, {

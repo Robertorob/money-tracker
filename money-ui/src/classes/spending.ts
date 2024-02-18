@@ -1,10 +1,10 @@
-import { ITag } from "./tag";
+import { ITagItem } from "./tag";
 
-export interface ISpending {
+export interface ISpendingItem {
   id: number;
   cost: number;
   comment: string;
-  tag: ITag;
+  tag: ITagItem;
   expanded: boolean | null | undefined;
 }
 
@@ -12,5 +12,5 @@ export interface IUpdateSpending {
   id: number;
   cost: number;
   comment: string;
-  tagId?: number | null;
+  tagIds?: number[] | null;
 }

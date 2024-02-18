@@ -2,5 +2,5 @@
 
 public class GetSpendingsDto
 {
-    public List<GetSpendingDto> Spendings { get; set; }
+    public IEnumerable<GetSpendingDto> Spendings { get; set; }
 }
