@@ -6,7 +6,7 @@ export interface ISpendingFormProps {
   form: ISpendingForm;
   onCostChange: any;
   onCommentChange: any;
-  onMultiTagChange: any;
+  onTagsChange: any;
   onUpdateButtonClick: any;
   onCreateButtonClick: any;
 }
@@ -45,7 +45,7 @@ export default function SpendingForm(props: ISpendingFormProps) {
           value: props.form.tag?.id?.toString() ? [props.form.tag?.id?.toString()] : [],
           type: 'multiselect',
           label: 'Tags',
-          onChange: props.onMultiTagChange,
+          onChange: props.onTagsChange,
           selectOptions: props.availableTags.map((tag: ITag) => {
             return {
               value: tag?.id,

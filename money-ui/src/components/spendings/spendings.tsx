@@ -90,7 +90,7 @@ export default function Spendings() {
         form={spendingForm}
         onCostChange={handleCostChange}
         onCommentChange={handleCommentChange}
-        onMultiTagChange={handleMultiTagChange}
+        onTagsChange={handleMultiTagChange}
         onUpdateButtonClick={handleUpdateButtonClick}
         onCreateButtonClick={handleCreateButtonClick}
       />
