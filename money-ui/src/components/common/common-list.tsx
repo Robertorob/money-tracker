@@ -17,6 +17,7 @@ export interface IColumn {
   label: string;
   width: number;
   fieldNames: string[];
+  formatter?: (field: any) => string | number;
 }
 
 export default function CommonList(props: ICommonListProps) {
@@ -38,12 +39,18 @@ export default function CommonList(props: ICommonListProps) {
                 {props.items.map((item: any) =>
                   <>
                     {props.columns.map((column: IColumn) => {
+                      
                       let columnFieldValue = item;
                       column.fieldNames.some(fieldName => {
                         if (!columnFieldValue || !Object.hasOwn(columnFieldValue, fieldName))
                           return false;
                         columnFieldValue = columnFieldValue[fieldName];
                       });
+
+                      if (column.formatter) {
+                        columnFieldValue = column.formatter(columnFieldValue);
+                      }
+
                       return (
                         <Grid item xs={column.width} md={column.width} lg={column.width}>
                           <Typography mt={2}>{columnFieldValue}</Typography>
