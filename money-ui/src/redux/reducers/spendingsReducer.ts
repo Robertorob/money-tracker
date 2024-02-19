@@ -45,7 +45,6 @@ export const spendingsReducer = (state = initialState, action: AnyAction): any =
         spendings: [ action.payload, ...state.spendings ],
         spendingForm: {
           ...initialState.spendingForm,
-          isUpdate: false,
         }
       }
     case 'UPDATE_SPENDING':
@@ -57,12 +56,12 @@ export const spendingsReducer = (state = initialState, action: AnyAction): any =
             ...spending, 
             cost: action.payload.cost,
             comment: action.payload.comment,
-            tag: action.payload.tag,
+            tags: action.payload.tags,
+            expanded: false,
           } : spending
         ),
         spendingForm: {
           ...initialState.spendingForm,
-          isUpdate: false,
         }
      }
     case 'SEND_SPENDING_TO_FORM':

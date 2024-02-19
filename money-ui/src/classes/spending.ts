@@ -1,10 +1,10 @@
-import { ITagItem } from "./tag";
+import { ITag } from "../components/spendings/spending-form";
 
 export interface ISpendingItem {
   id: number;
   cost: number;
   comment: string;
-  tags: ITagItem[];
+  tags: ITag[];
   expanded: boolean | null | undefined;
 }
 
