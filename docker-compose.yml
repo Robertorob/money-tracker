@@ -13,7 +13,7 @@ services:
       - ./money-db:/var/lib/postgresql/data
   backend:
     restart: always
-    image: robertorob3/money-backend:2.0.1
+    image: robertorob3/money-backend:3.0.0
     container_name: money-backend
     ports:
      - "5299:8080"
@@ -21,7 +21,7 @@ services:
      - ./money-backend/appsettings.override.json:/publish/appsettings.json
   ui:
     restart: always
-    image: robertorob3/money-ui:2.0.0
+    image: robertorob3/money-ui:3.0.0
     container_name: money-ui
     ports:
       - "80:80"
