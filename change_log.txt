@@ -1,0 +1,4 @@
+ui		3.0.0
+backend		3.0.0
+
+Set multiple tags on one spending.
