@@ -36,18 +36,18 @@ export default function CommonForm(props: ICommonFormProps) {
   return (
     <FormGroup sx={formGroupSx}>
       {
-        props.fields.map((field: IField) =>
+        props.fields.map((field: IField, index: number) =>
         {
           if (field.type === 'number' || field.type === 'text')
             return (
-              <FormControl fullWidth sx={formControlSx}>
+              <FormControl fullWidth sx={formControlSx} key={index}>
                 <TextField value={field.value} label={field.label} onChange={field.onChange} type={field.type} variant="outlined"/>
               </FormControl>
             );
 
           if (field.type === 'mui-select')
             return (
-              <FormControl fullWidth sx={formControlSx}>
+              <FormControl fullWidth sx={formControlSx} key={index}>
                 <InputLabel>{field.label}</InputLabel>
                 <Select
                   value={field.value}
@@ -65,7 +65,7 @@ export default function CommonForm(props: ICommonFormProps) {
           
           if (field.type === 'select')
             return (
-              <FormControl fullWidth sx={formControlSx}>
+              <FormControl fullWidth sx={formControlSx} key={index}>
                 <ReactSelect
                   placeholder={field.label}
                   options={field.selectOptions ?? []}
@@ -77,8 +77,9 @@ export default function CommonForm(props: ICommonFormProps) {
           
           if (field.type === 'multiselect')
             return (
-              <FormControl fullWidth sx={formControlSx}>
+              <FormControl fullWidth sx={formControlSx} key={index}>
                 <ReactSelect
+                  value={field.value}
                   placeholder={field.label}
                   isMulti
                   options={field.selectOptions ?? []}

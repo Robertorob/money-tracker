@@ -41,7 +41,7 @@ export default function SpendingForm(props: ISpendingFormProps) {
           onChange: props.onCommentChange,
         },
         {
-          value: props.form.tags ? props.form.tags.map((tag: ITag) => tag.id) : [],
+          value: props.form.tags ? props.form.tags.map((tag: ITag) => ({ value: tag.id, label: tag.name})) : [],
           type: 'multiselect',
           label: 'Tags',
           onChange: props.onTagsChange,
