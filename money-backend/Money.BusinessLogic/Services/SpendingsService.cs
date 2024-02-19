@@ -81,7 +81,7 @@ public class SpendingsService : ISpendingsService
   {
     _logger.LogInformation($"Update spending {updateSpending.Id}");
 
-    var entity = _context.Spendings.Where(meas => meas.Id == updateSpending.Id).SingleOrDefault();
+    var entity = _context.Spendings.Include(spending => spending.Tags).Where(meas => meas.Id == updateSpending.Id).SingleOrDefault();
 
     if (entity is null)
     {
@@ -91,7 +91,24 @@ public class SpendingsService : ISpendingsService
 
     entity.Cost = updateSpending.Cost;
     entity.Comment = updateSpending.Comment;
-    entity.Tags = updateSpending.TagIds?.Select(tagId => new Tag { Id = tagId }).ToList();
+
+    IQueryable<Tag>? tags = null;
+    if (updateSpending.TagIds is not null && updateSpending.TagIds.Any())
+    {
+      tags = _context.Tags.Where(tag => updateSpending.TagIds.Contains(tag.Id));
+    }
+
+    var oldTags = entity.Tags?.ToList();
+
+    if (oldTags is not null)
+    {
+      foreach (var tag in oldTags)
+      {
+        entity.Tags!.Remove(tag);
+      }
+    }
+
+    entity.Tags = tags?.ToList();
 
     await _context.SaveChangesAsync();
   }
