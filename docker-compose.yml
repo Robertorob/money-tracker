@@ -10,7 +10,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
-      - ./money-db:/var/lib/postgresql/data
+      - ${POSTGRES_PATH}:/var/lib/postgresql/data
   backend:
     restart: always
     image: robertorob3/money-backend:3.0.0
