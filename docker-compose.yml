@@ -13,7 +13,7 @@ services:
       - ${POSTGRES_PATH}:/var/lib/postgresql/data
   backend:
     restart: always
-    image: robertorob3/money-backend:3.0.0
+    image: robertorob3/money-backend:3.0.1
     container_name: money-backend
     ports:
      - "5299:8080"
