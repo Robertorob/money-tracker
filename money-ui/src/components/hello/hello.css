@@ -1,19 +1,19 @@
-.hello-page {
+.hello {
   text-align: center;
 }
 
-.hello-page-logo {
+.hello-logo {
   height: 30vmin;
   pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .hello-page-logo {
+  .hello-logo {
     animation: hello-page-logo-spin infinite 20s linear;
   }
 }
 
-.hello-page-header {
+.hello-header {
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -24,7 +24,7 @@
   font-weight: 100;
 }
 
-@keyframes hello-page-logo-spin {
+@keyframes hello-logo-spin {
   from {
     transform: rotate(0deg);
   }
