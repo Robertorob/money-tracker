@@ -1,8 +1,9 @@
 export default function DaysCounterPage() {
    return (
     <>
-      Days counter
-
+      <div>
+        Days counter
+      </div>
     </>
   );
 }

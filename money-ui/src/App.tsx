@@ -1,15 +1,14 @@
 import 'App.css';
-import HelloPage from 'components/hello/hello'
-import TabContainer from 'components/tab/tab-container';
-import Contacts from 'components/contacts/contacts';
-import Spendings from 'components/spendings/spendings';
-import Tags from 'components/tags/tags';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import MoneyDrawer from 'components/drawer/drawer';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { IDrawerListItem } from 'components/drawer/drawerList';
 import WavingHandIcon from '@mui/icons-material/WavingHand';
+import { BrowserRouter, Routes, Route } from "react-router";
+import HomePage from 'pages/homePage';
+import SpendingsPage from 'pages/spendingsPage';
+import DaysCounterPage from 'pages/daysCounterPage';
 
 export default function App() {
   const menuItems: IDrawerListItem[] = [
@@ -20,12 +19,12 @@ export default function App() {
     },
     {
       label: 'Spendings',
-      link: '',
+      link: 'spendings',
       icon: <AttachMoneyIcon />,
     },
     {
       label: 'Days counter',
-      link: '',
+      link: 'days-counter',
       icon: <CalendarMonthIcon />,
     },
   ]; 
@@ -40,13 +39,21 @@ export default function App() {
 
   return (
     <>
-      <MoneyDrawer menuItems={menuItems} menuItemsAfterDivider={menuItemsAfterDivider} />
-      <TabContainer labels={['Home', 'Spendings', 'Tags', 'Contacts']}>
-        <HelloPage />
-        <Spendings />
-        <Tags />
-        <Contacts />
-      </TabContainer>
+      <BrowserRouter>
+        <MoneyDrawer menuItems={menuItems} menuItemsAfterDivider={menuItemsAfterDivider} />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+        <Routes>
+          <Route path="/home" element={<HomePage />} />
+        </Routes>
+        <Routes>
+          <Route path="/spendings" element={<SpendingsPage />} />
+        </Routes>
+        <Routes>
+          <Route path="/days-counter" element={<DaysCounterPage />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

@@ -8,6 +8,7 @@ import { Container } from '@mui/material';
 export interface ITabContainerProps {
   children?: React.ReactNode;
   labels?: string[];
+  tabContainerName: string;
 }
 
 function a11yProps(index: number) {
@@ -18,12 +19,13 @@ function a11yProps(index: number) {
 }
 
 export default function TabContainer(props: ITabContainerProps) {
-  const { children, labels } = props;
-  const [value, setValue] = React.useState(parseInt(localStorage.tabNumber) ?? 0);
+  const { children, labels, tabContainerName } = props;
+  const tabNumberPropertyName = tabContainerName + '.tabNumber'
+  const [value, setValue] = React.useState(parseInt(localStorage[tabNumberPropertyName]) ?? 0);
   
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
-    localStorage.tabNumber = newValue;
+    localStorage[tabNumberPropertyName] = newValue;
   };
 
   return (

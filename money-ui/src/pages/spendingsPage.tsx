@@ -5,7 +5,7 @@ import Tags from 'components/tags/tags';
 export default function SpendingsPage() {
   return (
     <>
-      <TabContainer labels={['Spendings', 'Tags']}>
+      <TabContainer tabContainerName='spendings' labels={['Spendings', 'Tags']}>
         <Spendings />
         <Tags />
       </TabContainer>
