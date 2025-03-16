@@ -12,6 +12,12 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+
+export interface IMenuItem {
+  label: string;
+  link: string;
+}
 
 export default function App() {
 
@@ -21,24 +27,39 @@ export default function App() {
     setOpen(newOpen);
   };
 
+  const menuItems: IMenuItem[] = [
+    {
+      label: 'Траты',
+      link: '',
+    },
+    {
+      label: 'Счётчик дней',
+      link: '',
+    },
+  ]
+
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
-        {['Счётчик дней', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
+        {menuItems.map((menuItem, index) => (
+          <ListItem key={index} disablePadding>
             <ListItemButton onClick={() => alert('реализовать страницу')}>
               <ListItemIcon>
-                {index == 0 ? <CalendarMonthIcon /> : null}
-                {index !== 0 ? <InboxIcon /> : null}
+                {
+                  {
+                    0: <AttachMoneyIcon />,
+                    1: <CalendarMonthIcon />,
+                  }[index] || null
+                }
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={menuItem.label} />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+        {['All mail'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
