@@ -21,7 +21,7 @@ function a11yProps(index: number) {
 export default function TabContainer(props: ITabContainerProps) {
   const { children, labels, tabContainerName } = props;
   const tabNumberPropertyName = tabContainerName + '.tabNumber'
-  const [value, setValue] = React.useState(parseInt(localStorage[tabNumberPropertyName]) ?? 0);
+  const [value, setValue] = React.useState(parseInt(localStorage[tabNumberPropertyName] ?? 0));
   
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
