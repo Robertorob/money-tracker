@@ -19,27 +19,28 @@ function a11yProps(index: number) {
 
 export default function TabContainer(props: ITabContainerProps) {
   const { children, labels } = props;
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(parseInt(localStorage.tabNumber) ?? 0);
   
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    localStorage.tabNumber = newValue;
   };
 
   return (
     <Box sx={{ width: '100%' }}>
-    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-      <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
-        {labels?.map((label, index) => (<Tab key={index} label={label} {...a11yProps(index)} />)) }
-      </Tabs>
-    </Box>
-    { 
-      React.Children.map(children, (child, index) =>
-        <Container key={index} maxWidth={'md'} sx={{p: 0}}>
-          <TabPanel key={index} value={value} index={index}>
-            {child}
-          </TabPanel>
-        </Container>)
-    }
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
+          {labels?.map((label, index) => (<Tab key={index} label={label} {...a11yProps(index)} />)) }
+        </Tabs>
+      </Box>
+      { 
+        React.Children.map(children, (child, index) =>
+          <Container key={index} maxWidth={'md'} sx={{p: 0}}>
+            <TabPanel key={index} value={value} index={index}>
+              {child}
+            </TabPanel>
+          </Container>)
+      }
     </Box>
   );
 }
