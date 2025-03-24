@@ -43,14 +43,8 @@ export default function App() {
         <MoneyDrawer menuItems={menuItems} menuItemsAfterDivider={menuItemsAfterDivider} />
         <Routes>
           <Route path="/" element={<HomePage />} />
-        </Routes>
-        <Routes>
           <Route path="/home" element={<HomePage />} />
-        </Routes>
-        <Routes>
           <Route path="/spendings" element={<SpendingsPage />} />
-        </Routes>
-        <Routes>
           <Route path="/days-counter" element={<DaysCounterPage />} />
         </Routes>
       </BrowserRouter>
