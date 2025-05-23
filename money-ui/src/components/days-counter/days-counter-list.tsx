@@ -19,7 +19,12 @@ export default function DaysCounterList(props: IDaysCounterListProps) {
               columns={[
                 {
                   label: 'field',
-                  width: 12,
+                  width: 4,
+                  fieldNames: ['field'],
+                },
+                {
+                  label: 'field 2',
+                  width: 4,
                   fieldNames: ['field'],
                 },
               ]}

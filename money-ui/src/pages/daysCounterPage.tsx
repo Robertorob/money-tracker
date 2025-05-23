@@ -10,19 +10,17 @@ export default function DaysCounterPage() {
       <div>
         <TabContainer tabContainerName='days-counter' labels={['Events', 'Add']}>
           <DaysCounterList daysCounterItems={[
-            {
-              field: 'field 1',
-            },
-            {
-              field: 'field 2',
-            },
-          ]} deleteHandler={function (id: number): void {
-             throw new Error("Function not implemented.");
-           } } updateHandler={function (id: number): void {
-             throw new Error("Function not implemented.");
-           } } expandHandler={function (id: number): void {
-             throw new Error("Function not implemented.");
-           } }  />
+              {
+                field: 'field 1',
+              },
+              {
+                field: 'field 2',
+              },
+            ]}
+            deleteHandler={(id: number) => {alert("Function not implemented.")}}
+            updateHandler={(id: number) => {alert("Function not implemented.")}}
+            expandHandler={(id: number) => {alert("Function not implemented.")}}
+          />
           <DaysCounterForm form={{
             isUpdate: false,
             field: '3',
